@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1, maximum-scale=5"
 />
 <meta name="generator" content="Hexo 6.3.0">
-<link rel="stylesheet" href="/css/style.css?v=1669898020170">
+<link rel="stylesheet" href="/css/style.css?v=1669904642346">
 <link rel="shortcut icon" href="/images/IMG_5749.png" type="image/png" />
 <link
     rel="stylesheet"
@@ -21,7 +21,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/solarized-light.css"
 />
-<script src="/js/core.js?v=1669898020171"></script>
+<script src="/js/core.js?v=1669904642346"></script>
 
 
 
@@ -132,6 +132,37 @@
 <p><strong>character set</strong>：指定表的字符集，若没有指定，则默认为所在数据库的字符集</p>
 <p><strong>collate</strong>：指定表的校对规则，若没有指定，则默认为所在数据库的校对规则</p>
 <p><strong>engine</strong>：指定表的引擎</p>
+<p><strong>练习：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t15 (</span><br><span class="line">	id INT,</span><br><span class="line">	`name` CHAR(32),</span><br><span class="line">	sex CHAR(32),</span><br><span class="line">	birthday DATE,</span><br><span class="line">	entry_date DATETIME,</span><br><span class="line">	job CHAR(32),</span><br><span class="line">	Salary DOUBLE,</span><br><span class="line">	RESUME TEXT) CHARSET utf8 COLLATE utf8_bin ENGINE INNODB;</span><br><span class="line">SELECT * FROM t15;</span><br></pre></td></tr></table></figure>
+
+<p>– 添加一条</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO t15 VALUES(100,&#x27;李白&#x27;,&#x27;2000-11-18&#x27;,&#x27;2018-11-18 11:11:11&#x27;,</span><br><span class="line">&#x27;写诗的&#x27;,10000,&#x27;皇上叫我写诗&#x27;,&#x27;&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><p>#<strong>添加列</strong><br>– ALTER TABLE tablename<br>– ADD	(column datatype [DEFAULT exper]<br>–	[, column datatype]…);<br>– <strong>员工表t15的基础上增加一个image列，char类型(要求加在resume后面)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE t15</span><br><span class="line">ADD	image CHAR(32) NOT NULL DEFAULT &#x27;&#x27; AFTER RESUME;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESC employee</span><br></pre></td></tr></table></figure>
+
+<p> – <strong>显示表结构，可以查看表的所有列</strong></p>
+<p>#修改列<br>– <strong>修改</strong>job列，<strong>使其长度为60</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE t15</span><br><span class="line">	MODIFY job VARCHAR(60) NOT NULL DEFAULT &#x27; &#x27;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>删除</strong>sec<strong>列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE t15</span><br><span class="line">	DROP sex</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>表名改为employee</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RENAME TABLE t15 TO employee</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>修改表的字符集</strong>为utf8</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE employee CHARACTER SET utf8</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>列名name修改为user_name</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE employee CHANGE NAME user_name VARCHAR(32) NOT NULL DEFAULT &#x27; &#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM employee;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="列类型"><a href="#列类型" class="headerlink" title="列类型"></a>列类型</h2><h3 id="常用数据类型"><a href="#常用数据类型" class="headerlink" title="常用数据类型"></a>常用数据类型</h3><p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212012031662.png" alt="image-20221201203136555"></p>
 <h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>#演示整数<br>#说明：表的字符集，校验规则，存储引擎，使用默认<br>#1.如果<strong>没有指定unsigned</strong>，<strong>则TINYINT就是有符号的</strong>(-128~127)，如果没有符号(0-255)<br>#2.如果<strong>指定unsigned</strong>，<strong>则TINYINT就是无符号</strong>0-255</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t3 (</span><br><span class="line">	id TINYINT);</span><br><span class="line">CREATE TABLE t4 (</span><br><span class="line">	id TINYINT UNSIGNED);</span><br></pre></td></tr></table></figure>
@@ -141,10 +172,10 @@
 <h3 id="bit"><a href="#bit" class="headerlink" title="bit"></a>bit</h3><p>#演示bit类型使用<br>#说明<br>#1.bit(m) <strong>m在1-64</strong><br>#2.添加数据 范围 <strong>按照你给的位数来确定</strong>，比如<strong>m&#x3D;8表示一个字节</strong> 0~255<br>#3.显示按照bit<br>#4.查询时，仍然可以<strong>按照数来查询</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t5 (num BIT(8));</span><br><span class="line">INSERT INTO t5 VALUES(255);</span><br><span class="line">SELECT * FROM t5</span><br><span class="line">SELECT * FROM t5 WHERE num = 1;</span><br></pre></td></tr></table></figure>
 
-<h3 id="小数型"><a href="#小数型" class="headerlink" title="小数型"></a>小数型</h3><p>#演示decimal类型，float，double使用（一般使用double或者decimal，因为其精度更高）<br>#创建表</p>
+<h3 id="小数型"><a href="#小数型" class="headerlink" title="小数型"></a>小数型</h3><p>#演示decimal类型，float，double使用（一般使用<strong>double</strong>或者<strong>decimal</strong>，因为其<strong>精度更高</strong>）<br>#创建表</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t6 (</span><br><span class="line">	num1 FLOAT,</span><br><span class="line">	num2 DOUBLE,</span><br><span class="line">	num3 DECIMAL(30,20));</span><br></pre></td></tr></table></figure>
 
-<p>#decimal(m,n)如果没有给m，n赋值，那么会默认m为10，n为0<br>#添加数据</p>
+<p>#decimal(m,n)如果<strong>没有</strong>给m，n赋值，那么会<strong>默认m为10，n为0</strong><br>#添加数据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO t6 VALUES(88.12345678912345,88.12345678912345,88.12345678912345);</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM t6;</span><br></pre></td></tr></table></figure>
@@ -155,6 +186,100 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t8 (</span><br><span class="line">	num BIGINT UNSIGNED);</span><br><span class="line">INSERT INTO t8 VALUES(899999999999999999999999999999999999999999999999999999999999999);</span><br><span class="line">SELECT * FROM t8;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212012032764.png" alt="image-20221201203217730"></p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>#演示字符串类型使用char varchar<br>#注释的快捷键 shift+ctrl+c，取消注释 shift+ctrl+r<br>– CHAR(size)<br>– <strong>固定</strong>长度字符串 <strong>最大255字符</strong><br>– VARCHAR(size)      0~65535(<strong>字节，而不是字符</strong>)<br>– <strong>可变</strong>长度字符串 <strong>最大65532字节</strong>   【<strong>utf8编码</strong>最大21844字符 <strong>1-3个字节用于记录大小</strong>】<br>– 如果表的编码是 <strong>utf8</strong> varchar(size) size&#x3D;(65535-3) &#x2F; 3 &#x3D; <strong>21844</strong><br>– 如果表的编码是 <strong>gbk</strong> varchar(size) size&#x3D;(65535-3) &#x2F; 2 &#x3D; <strong>32766</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t9 (</span><br><span class="line">	`name` CHAR(255));</span><br><span class="line">CREATE TABLE t10 (</span><br><span class="line">	`name` VARCHAR(32766) CHARACTER SET gbk);</span><br></pre></td></tr></table></figure>
+
+<p>#演示<strong>字符串类型的使用细节</strong><br>#1.char(4) 和 varchar(4) 这个4表示的是<strong>字符</strong>，而<strong>不是</strong>字节，<strong>不区分</strong>字符是汉字还是字母<br>#2.char(4)是<strong>定长</strong>(固定的大小)，就是说，即使你插入’aa’，也会占用分配的4个字节的空间<br>#3.varchar(4)是<strong>变长</strong>(变化的大小)，就是说，如果你插入了’aa’，实际占用空间大小并不是4个字符<br>– 而是<strong>按照实际占用空间来分配</strong><br>– varchar本身还需要<strong>1-3个字节来记录存放内容长度</strong><br>– <strong>L(实际数据大小)+(1-3)字节</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t11 (</span><br><span class="line">	`name` CHAR(4));</span><br><span class="line">INSERT INTO t11 VALUES(&#x27;abcd&#x27;);</span><br><span class="line"></span><br><span class="line">INSERT INTO t11 VALUES(&#x27;白居易号&#x27;);</span><br><span class="line"></span><br><span class="line">SELECT * FROM t11;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t12 (</span><br><span class="line">	`name` VARCHAR(4));</span><br><span class="line">INSERT INTO t12 VALUES(&#x27;abcd&#x27;);</span><br><span class="line"></span><br><span class="line">INSERT INTO t12 VALUES(&#x27;白居易号&#x27;);</span><br><span class="line"></span><br><span class="line">INSERT INTO t12 VALUES(&#x27;ab李白&#x27;);</span><br><span class="line"></span><br><span class="line">SELECT * FROM t12;</span><br></pre></td></tr></table></figure>
+
+<p>#4.什么时候使用char，什么时候使用varchar<br>– 如果数据<strong>定长</strong>，推荐使用<strong>char</strong>，比如md5的密码，邮编，手机号，身份证号码等.char(32)<br>– 如果一个字段的长度是<strong>不确定</strong>，我们使用<strong>varchar</strong>，比如留言，文章<br>– <strong>查询速度：char&gt;varchar</strong></p>
+<p>#5.在存放<strong>文本</strong>时，也可以使用<strong>Text</strong>数据类型<br>– 可以将Text列视为VARCHAR列，注意Text<strong>不能有默认值</strong>，大小0-2^16字节<br>– 如果希望存放更多字符，可以选择<br>– MEDIUMTEXT 0-2^24 或者 LONGTEXT 0~2^32</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t13 (content TEXT, content2 MEDIUMTEXT, content3 LONGTEXT);</span><br><span class="line">INSERT INTO t13 VALUES(&#x27;李白是诗神&#x27;,&#x27;白居易是诗人&#x27;,&#x27;杜甫是散人~~&#x27;);</span><br><span class="line">SELECT * FROM t13;</span><br></pre></td></tr></table></figure>
+
+<h3 id="日期类"><a href="#日期类" class="headerlink" title="日期类"></a>日期类</h3><p>#演示时间相关的类型<br>#创建一张表，date，datetime，<strong>timestamp</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t14 (</span><br><span class="line">	birthday DATE, -- 生日</span><br><span class="line">	job_time DATETIME, -- 记录年月日 时分秒</span><br><span class="line">	login_time TIMESTAMP</span><br><span class="line">	 NOT NULL DEFAULT CURRENT_TIMESTAMP </span><br><span class="line">	 ON UPDATE CURRENT_TIMESTAMP); </span><br></pre></td></tr></table></figure>
+
+<p>– 登录时间，如果希望login_time列自动更新，需要<strong>配置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM t14;</span><br><span class="line">	INSERT INTO t14(birthday,job_time)</span><br><span class="line">	VALUES(&#x27;2022-11-18&#x27;,&#x27;2022-11-18 20:41:10&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>– 如果我们更新了t14表的某条记录，login_time列会自动的<strong>以当前时间进行更新</strong></p>
+<h2 id="CRUD语句"><a href="#CRUD语句" class="headerlink" title="CRUD语句"></a>CRUD语句</h2><h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><p>#<strong>练习</strong>insert语句<br>– 创建一张商品表goods (id int , goods_name , varchar(10) , price double);<br>– 添加两条记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `goods` (</span><br><span class="line">	id INT,</span><br><span class="line">	goods_name VARCHAR(10),</span><br><span class="line">	price DOUBLE);</span><br></pre></td></tr></table></figure>
+
+<p>– 添加数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` (id,goods_name,price)</span><br><span class="line">	VALUES(10,&#x27;华为手机&#x27;,5000);</span><br><span class="line">INSERT INTO `goods` (id,goods_name,price)</span><br><span class="line">	VALUES(20,&#x27;苹果手机&#x27;,9000);</span><br><span class="line">SELECT * FROM `goods`;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `goods2` (</span><br><span class="line">	id INT,</span><br><span class="line">	goods_name VARCHAR(10),</span><br><span class="line">	price DOUBLE NOT NULL DEFAULT 100);</span><br></pre></td></tr></table></figure>
+
+<p>#追加练习<br>– 使用insert语句向表employee中插入2个员工的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO employee (id,user_name,birthday,entry_date,job,Salary,`resume`)</span><br><span class="line">	VALUES(101,&#x27;杜甫&#x27;,&#x27;1998-11-21&#x27;,&#x27;1998-11-28 21:00:00&#x27;,&#x27;写诗的&#x27;,6000,&#x27;为百姓写诗&#x27;);</span><br><span class="line">INSERT INTO employee (id,user_name,birthday,entry_date,job,Salary,`resume`)</span><br><span class="line">	VALUES(102,&#x27;白居易&#x27;,&#x27;2016-11-21&#x27;,&#x27;2016-11-28 21:00:00&#x27;,&#x27;写诗的&#x27;,6000,&#x27;为历史写诗&#x27;);</span><br><span class="line">SELECT * FROM employee;</span><br></pre></td></tr></table></figure>
+
+<p>#说明<strong>insert语句的细节</strong><br>– 1.<strong>插入的数据应与字段的数据类型相同</strong><br>–	比如<strong>把’abc’添加到int类型会错误</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` (id,goods_name,price)**</span><br><span class="line">	VALUES(&#x27;abc&#x27;,&#x27;小米手机&#x27;,4000);#Incorrect integer value</span><br><span class="line">INSERT INTO `goods` (id,goods_name,price)**</span><br><span class="line">	VALUES(&#x27;30&#x27;,&#x27;小米手机&#x27;,4000);#success,底层会尝试转换</span><br></pre></td></tr></table></figure>
+
+<p>– 2.<strong>数据的长度应在列的规定范围内</strong>，例如：不能将一个长度为80的字符串加入到长度为40的列中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` (id,goods_name,price)</span><br><span class="line">	VALUES(40,&#x27;vivovivovivovivovivovivo手机&#x27;,3000);#Data too long for column</span><br></pre></td></tr></table></figure>
+
+<p>– 3.<strong>在values中列出的数据位置必须与被加入的列的排序位置相对应</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` (id,goods_name,price)</span><br><span class="line">	VALUES(&#x27;vivo手机&#x27;,40,3000);#Incorrect integer value</span><br><span class="line">INSERT INTO `goods` (goods_name,id,price)</span><br><span class="line">	VALUES(&#x27;vivo手机&#x27;,40,3000);#success</span><br></pre></td></tr></table></figure>
+
+<p>– 4.<strong>字符和日期型数据应包含在单引号中</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` (id,goods_name,price)</span><br><span class="line">	VALUES(40,vivo手机,3000);#Unknown column 应该&#x27;vivo手机&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>– 5.**列可以插入空值[前提是该字段允许为空]**，insert into table_name values(null)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` (id,goods_name,price)</span><br><span class="line">	VALUES(50,&#x27;oppo手机&#x27;,NULL);#success 因为我们创建表的时候没设置不为空 即(not null)</span><br></pre></td></tr></table></figure>
+
+<p>– 6.<strong>insert into table_name (列名…) values (),(),()  形式添加多条记录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` (id,goods_name,price)</span><br><span class="line">	VALUES(60,&#x27;三星手机&#x27;,6000),(60,&#x27;海尔手机&#x27;,7000);#success</span><br></pre></td></tr></table></figure>
+
+<p>– 7.<strong>如果是给表中的所有字段添加数据，可以不写前面的字段名称</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods` </span><br><span class="line">	VALUES(70,&#x27;IBM手机&#x27;,5000);#success</span><br></pre></td></tr></table></figure>
+
+<p>– 8.<strong>默认值的使用，当不给某个字段值时，如果有默认值就会添加默认值，否则报错</strong><br>–	<strong>如果某个列，没有指定not null，那么添加数据时，没有给定值，则会默认给null</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `goods2` (id,goods_name)</span><br><span class="line">	VALUES(80,&#x27;格力手机&#x27;);#success,并且自动给price添加默认值100</span><br><span class="line">SELECT * FROM `goods2`;</span><br></pre></td></tr></table></figure>
+
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>#演示update语句<br>– 要求：在上面创建的employee表中修改表中的记录<br>– 1.将<strong>所有员工薪水修改为5000元</strong>.如果<strong>没有带where</strong>这个条件，会<strong>修改所有的记录</strong>，因此使用要小心</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE employee SET Salary = 5000</span><br></pre></td></tr></table></figure>
+
+<p>– 2.将<strong>姓名为李白的员工薪水修改为8000元</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE employee </span><br><span class="line">	SET salary = 3000 </span><br><span class="line">	WHERE user_name = &#x27;李白&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<p>– 3.将<strong>姓名为杜甫的员工在原有薪水基础上增加2000元</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATE employee</span><br><span class="line">	SET salary = salary + 2000</span><br><span class="line">	WHERE user_name = &#x27;杜甫&#x27;;</span><br><span class="line">	</span><br><span class="line">SELECT * FROM employee;</span><br></pre></td></tr></table></figure>
+
+<p>#update语句<strong>使用细节</strong><br>– 1.update语法可以用<strong>新值</strong>更新原有表行中的各列<br>– 2.set子句指示要修改哪些列和要给予哪些值<br>– 3.where子句<strong>指定</strong>应更新哪些行。如<strong>没有where</strong>子句，则<strong>更新所有的行(记录)<strong>，因此使用时要小心<br>– 4.如果需要</strong>修改多个字段</strong>，可以通过<strong>set 字段1&#x3D;值1，字段2&#x3D;值2…..</strong></p>
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p>#delete语句演示<br>– <strong>删除表中名称为’杜甫’的记录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM employee</span><br><span class="line">	WHERE user_name = &#x27;杜甫&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>– 删除表中所有记录<br>–	<strong>如不需要where子句，将删除表中所有数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM employee;</span><br></pre></td></tr></table></figure>
+
+<p>#delete语句<strong>使用细节</strong><br>– <strong>delete语句不能删除某一列的值</strong>(可使用update 设为null或者’’)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE employee SET job = &#x27;&#x27; WHERE user_name=&#x27;杜甫&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>– 使用<strong>delete语句仅删除记录，不删除表本身</strong>。如要<strong>删除表，使用drop table语句</strong>。<br>– 	<strong>drop table 表名;</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE employee;</span><br><span class="line">SELECT * FROM employee;</span><br></pre></td></tr></table></figure>
+
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>– select 语句【<strong>重点 难点</strong>】<br>– <strong>格式:</strong><br><strong>– SELECT [distinct] * {column1,column2,column3..}</strong><br><strong>– 		FROM table_name;</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE student (</span><br><span class="line">	id INT NOT NULL DEFAULT 1,</span><br><span class="line">	`name` VARCHAR(20) NOT NULL DEFAULT &#x27;&#x27;,</span><br><span class="line">	chinese FLOAT NOT NULL DEFAULT 0.0,</span><br><span class="line">	english FLOAT NOT NULL DEFAULT 0.0,</span><br><span class="line">	math FLOAT NOT NULL DEFAULT 0.0);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO student </span><br><span class="line">	VALUES(1,&#x27;李白&#x27;,100,90,80),(2,&#x27;杜甫&#x27;,100,90,90),(3,&#x27;白居易&#x27;,95,80,80),(4,&#x27;王维&#x27;,95,80,80),</span><br><span class="line">	(5,&#x27;赵云&#x27;,82,84,67),(6,&#x27;关羽&#x27;,88,98,90),(7,&#x27;张飞&#x27;,67,98,56),(8,&#x27;李世民&#x27;,100,90,95);</span><br><span class="line">	</span><br><span class="line">SELECT * FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询表中<strong>所有</strong>学生的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询表中<strong>所有</strong>学生的<strong>姓名和对应的英语成绩</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT `name`,english FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>过滤表中重复数据 distinct</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT english FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>要查询的记录，每个字段都相同，才会去重</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT `name`,english FROM student;</span><br></pre></td></tr></table></figure>
+
 
 			<br>
 			
