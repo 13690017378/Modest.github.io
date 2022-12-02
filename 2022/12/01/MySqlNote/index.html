@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1, maximum-scale=5"
 />
 <meta name="generator" content="Hexo 6.3.0">
-<link rel="stylesheet" href="/css/style.css?v=1669904642346">
+<link rel="stylesheet" href="/css/style.css?v=1669966445186">
 <link rel="shortcut icon" href="/images/IMG_5749.png" type="image/png" />
 <link
     rel="stylesheet"
@@ -21,7 +21,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/solarized-light.css"
 />
-<script src="/js/core.js?v=1669904642346"></script>
+<script src="/js/core.js?v=1669966445186"></script>
 
 
 
@@ -280,6 +280,268 @@
 <p>– <strong>要查询的记录，每个字段都相同，才会去重</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT `name`,english FROM student;</span><br></pre></td></tr></table></figure>
 
+<h4 id="2-0"><a href="#2-0" class="headerlink" title="2.0"></a>2.0</h4><p>#<strong>select语句的使用</strong><br>– 使用表达式对查询的列进行运算<br>– <strong>SELECT * |{column1|expression,column2|expression…}</strong><br>– 		<strong>FROM table_name;</strong></p>
+<p>– 在select语句中可使用as语句<br>– <strong>SELECT column_name as 别名 from 表名;</strong></p>
+<p>– <strong>统计每个学生的总分</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT `name`,(chinese+english+math) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 在<strong>所有学生总分加10分</strong>的情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT `name`,(chinese+english+math+10) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>使用别名表示学生分数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT `name` AS &#x27;名字&#x27;,(chinese+english+math+10) AS total_score FROM student;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-0"><a href="#3-0" class="headerlink" title="3.0"></a>3.0</h4><p>#select语句<br>– 查询<strong>姓名为赵云的学生</strong>成绩</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE `name`=&#x27;赵云&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>英语成绩大于90分</strong>的同学</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE english&gt;90;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>总分大于200分</strong>的所有同学</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE (chinese+english+math)&gt;200;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>math大于60并且(and)id大于4</strong>的学生成绩</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE math&gt;60 AND id&gt;4;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>英语成绩大于语文成绩</strong>的同学</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE english&gt;chinese;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>总分大于200分并且数学成绩小于语文成绩的姓李的学生</strong><br>– <strong>李%表示名字以李开头的就可以</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE</span><br><span class="line">	(chinese+math+english)&gt;200 AND math&lt;chinese</span><br><span class="line">	 AND `name` LIKE &#x27;李%&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<p>– 查询<strong>英语成绩在80-90之间</strong>的同学</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE english&gt;=80 AND english&lt;=90;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>between..and…是一个闭区间</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE english BETWEEN 80 AND 90;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>数学分数为89，90，91</strong>的同学</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE math BETWEEN 89 AND 91;</span><br><span class="line">SELECT * FROM student WHERE math=89 OR math=90 OR math=91;</span><br><span class="line">SELECT * FROM student WHERE math IN(89,90,91);</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>所有姓李的学生成绩</strong>(<strong>%表示任意多个字符</strong>)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE `name` LIKE &#x27;李%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>– 查询<strong>数学分&gt;80，语文成绩&gt;80</strong>的同学</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE math&gt;80 AND chinese&gt;80;</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h3><p>#演示mysql统计函数的使用<br>– <strong>count</strong><br>– 统计<strong>一个班级****共有多少学生</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(*) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 统计<strong>数学成绩大于90</strong>的有多少个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(*) FROM student WHERE math&gt;90;</span><br></pre></td></tr></table></figure>
+
+<p>– 统计<strong>总分大于250</strong>的人数有多少</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(*) FROM student WHERE (math+chinese+english)&gt;250;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>count(*)<strong>和</strong>count(列)<strong>的区别<br>– 解释：</strong>count(*)返回满足条件的记录的行数</strong><br>– <strong>count(列)：统计满足条件的某列有多少个，但是会排除为null</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t15 (</span><br><span class="line">	`name` VARCHAR(20));</span><br><span class="line">INSERT INTO t15 VALUES(&#x27;tom&#x27;);</span><br><span class="line">INSERT INTO t15 VALUES(&#x27;jack&#x27;);</span><br><span class="line">INSERT INTO t15 VALUES(&#x27;mary&#x27;);</span><br><span class="line">INSERT INTO t15 VALUES(NULL);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM t15;</span><br><span class="line">SELECT COUNT(*) FROM t15;-- 4</span><br><span class="line">SELECT COUNT(`name`) FROM t15;-- 3</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>sum</strong><br>– 统计一个班级<strong>数学总成绩</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SUM(math) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 统计一个班级<strong>语文，英语，数学各科的总成绩</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SUM(math),SUM(english),SUM(chinese) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 统计一个班级<strong>语文，英语，数学的成绩总和</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SUM(math+english+chinese) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 统计一个班级<strong>语文成绩平均分</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SUM(chinese)/COUNT(*) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>avg</strong><br>– 求一个班级<strong>数学平均分</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(math) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– 求一个班级总分<strong>平均分</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(math+english+chinese) FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>Max&#x2F;min</strong><br>– 求<strong>班级最高分和最低分</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT MAX(math+chinese+english) FROM student;</span><br><span class="line">SELECT MIN(math+chinese+english) FROM student;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分组函数"><a href="#分组函数" class="headerlink" title="分组函数"></a>分组函数</h3><p>#演示group by的使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE dept(/*部门表*/</span><br><span class="line">deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,</span><br><span class="line">dname VARCHAR(20)NOT NULL DEFAULT &#x27;&#x27; &#x27;&#x27;,</span><br><span class="line">1oc VARCHAR(13)NOT NULL DEFAULT &#x27;&#x27; &#x27;&#x27;);</span><br><span class="line">INSERT INTO dept VALUES(10,&#x27;ACCOUNTING&#x27;,&#x27;NEW YORK&#x27;),(20,&#x27;RESEARCH&#x27;,&#x27;DALLAS&#x27;),(30,&#x27;SALES&#x27;,&#x27;CHICAGO&#x27;),(40,&#x27;OPERATIONS&#x27;,&#x27;BOSTON&#x27;);</span><br><span class="line">SELECT * FROM dept;</span><br></pre></td></tr></table></figure>
+
+<p>#创建表EMP雇员</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE emp;</span><br><span class="line">CREATE TABLE emp</span><br><span class="line">(empno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,/*编号*/</span><br><span class="line">ename VARCHAR(20)NOT NULL DEFAULT &#x27;&#x27; &#x27;&#x27;,/*名字*/</span><br><span class="line">job VARCHAR(9)NOT NULL DEFAULT &#x27;&#x27; &#x27;&#x27;,/*工作*/</span><br><span class="line">mgr MEDIUMINT UNSIGNED,/*上级编号*/</span><br><span class="line">hiredate DATE NOT NULL,/*入职时间*/</span><br><span class="line">sa1 DECIMAL(7,2) NOT NULL,/*薪水*/</span><br><span class="line">comm DECIMAL(7,2),/*红利*/</span><br><span class="line">deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0/*部门编号*/);</span><br></pre></td></tr></table></figure>
+
+<p>– 添加测试数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO emp VALUES(7369,&#x27;SMITH&#x27;,&#x27;CLERK&#x27;,7902,&#x27;1990-12-17&#x27;,800.00,NULL,20),</span><br><span class="line">(7499,&#x27;ALLEN&#x27;,&#x27;SALESMAN&#x27;,7698,&#x27;1991-2-20&#x27;,1600.00,300.00,30),</span><br><span class="line">(7521,&#x27;WARD&#x27;,&#x27;SALESMAN&#x27;,7698,&#x27;1991-2-22&#x27;,1250.00,500.00,30),</span><br><span class="line">(7566,&#x27;J0NES&#x27;,&#x27;MANAGER&#x27;,7839,&#x27;1991-4-2&#x27;,2975.00,NULL,20),</span><br><span class="line">(7654,&#x27;MARTIN&#x27;,&#x27;SALESMAN&#x27;,7698,&#x27;1991-9-28&#x27;,1250.00,1400.00,30),</span><br><span class="line">(7698,&#x27;BLAKE&#x27;,&#x27;MANAGER&#x27;,7839,&#x27;1991-5-1&#x27;,2850.00,NULL,30),</span><br><span class="line">(7782,&#x27;CLARK&#x27;,&#x27;MANAGER&#x27;,7839,&#x27;1991-6-9&#x27;,2450.00,NULL,10),</span><br><span class="line">(7788,&#x27;SC0TT&#x27;,&#x27;ANALYST&#x27;,7566,&#x27;1997-4-19&#x27;,3000.00,NULL,20),</span><br><span class="line">(7839,&#x27;KING&#x27;,&#x27;PRESIDENT&#x27;,NULL,&#x27;1991-11-17&#x27;,5000.00,NULL,10),</span><br><span class="line">(7844,&#x27;TURNER&#x27;,&#x27;SALESMAN&#x27;,7698,&#x27;1991-9-8&#x27;,1500.00,NULL,30),</span><br><span class="line">(7900,&#x27;JAMES&#x27;,&#x27;CLERK&#x27;,7698,&#x27;1991-12-3&#x27;,950.00,NULL,30),</span><br><span class="line">(7902,&#x27;FORD&#x27;,&#x27;ANALYST&#x27;,7566,&#x27;1991-12-3&#x27;,3000.00,NULL,20),</span><br><span class="line">(7934,&#x27;MILLER&#x27;,&#x27;CLERK&#x27;,7782,&#x27;1992-1-23&#x27;,1300.00,NULL,10);</span><br><span class="line"></span><br><span class="line">SELECT * FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>#工资级别表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE salgrade(</span><br><span class="line">grade MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,/*工资级别*/</span><br><span class="line">losal DECIMAL (17,2) NOT NULL,/*该级别的最低工资*/</span><br><span class="line">hisal DECIMAL(17,2) NOT NULL /*该级别的最高工资*/</span><br><span class="line">);</span><br><span class="line">INSERT INTO salgrade VALUES(1,700,1200);</span><br><span class="line">INSERT INTO salgrade VALUES(2,1201,1400);</span><br><span class="line">INSERT INTO salgrade VALUES(3,1401,2000);</span><br><span class="line">INSERT INTO salgrade VALUES(4,2001,3000);</span><br><span class="line">INSERT INTO salgrade VALUES(5,3001,9999);</span><br><span class="line"></span><br><span class="line">SELECT * FROM salgrade;</span><br></pre></td></tr></table></figure>
+
+<p>– 演示<strong>group by + having</strong><br>– <strong>having子句用于限制分组显示结果</strong></p>
+<p>– 如何显示<strong>每个部门的平均工资和最高工资</strong><br>– <strong>avg(sa1) max(sa1)</strong><br>– <strong>按照部门来分组查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(sa1),MAX(sa1),deptno </span><br><span class="line">	FROM emp GROUP BY deptno;</span><br></pre></td></tr></table></figure>
+
+<p>– 显示<strong>每个部门的每种岗位的平均工资和最低工资</strong><br>– <strong>avg(sa1) min(sa1)</strong><br>– <strong>按照部门来分组查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(sa1),MIN(sa1),deptno,job</span><br><span class="line">	FROM emp GROUP BY deptno,job;</span><br></pre></td></tr></table></figure>
+
+<p>– 显示<strong>平均工资低于2000的部门号和它的平均工资</strong><br>– <strong>化繁为简，各个击破</strong><br>– 1.显示<strong>各个部门的平均工资和部门号</strong><br>– 2.<strong>在1的结果基础上，进行过滤，保留平均工资小于2000的</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(sa1),deptno </span><br><span class="line">		FROM emp GROUP BY deptno</span><br><span class="line">		HAVING AVG(sa1)&lt;2000;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>使用别名</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(sa1) AS avg_sal,deptno </span><br><span class="line">		FROM emp GROUP BY deptno</span><br><span class="line">		HAVING avg_sal&lt;2000;</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><p>#字符串函数使用演示    使用emp表来演示<br>– <strong>CHARSET(str) 返回字符串字符集</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CHARSET(ename) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>CONCAT (string2 […..]) 连接字符串,将多个列拼接成一列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONCAT(ename,&#x27; job is &#x27;,job) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>INSTR (string,substring) 返回substring在string中出现的位置，没有返回0</strong><br>– <strong>dual亚元表，系统表 可以作为测试表使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT INSTR(&#x27;libai&#x27;,&#x27;li&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>UCASE (string2) 转换为大写</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT UCASE(ename) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>LCASE (string2) 转换为小写</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT LCASE(ename) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>LEFT (string2,length) 从string2中的左边起取length个字符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT LEFT(ename,2) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>RIGHT (string2,length) 从string2中的右边起取length个字符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT RIGHT(ename,2) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>LENGTH (string) string长度[按照字节返回]  比如’李白’会返回6（utf8字符集）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT LENGTH(ename) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>REPLACE (str,search_str,replace_str)</strong><br>– <strong>在str中用replace_str替换search_str</strong><br>– 如果是manager就替换成经理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ename ,REPLACE(job,&#x27;MANAGER&#x27;,&#x27;经理&#x27;) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>STRCMP (string1,string2) 逐字符比较两字符串大小</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT STRCMP(&#x27;hsp&#x27;,&#x27;jsp&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>SUBSTRING (str，position，[length])</strong><br>– <strong>从str的position开始【从1开始计算】，取length个字符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SUBSTRING(ename ,1,2) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>LTRIM (string2) RTRIM (string2) 去除前端空格或者后端空格</strong><br>– <strong>TRIM(string) 去除前后端空格</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT LTRIM(&#x27;      李白是诗人&#x27;) FROM DUAL;</span><br><span class="line">SELECT LTRIM(&#x27;李白是诗人      &#x27;) FROM DUAL;</span><br><span class="line">SELECT LTRIM(&#x27;      李白是诗人       &#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>以首字母小写的方式显示所有员工的姓名</strong><br>– 方式1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONCAT( LCASE(SUBSTRING(ename,1,1)) ,SUBSTRING(ename,2))</span><br><span class="line">	FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– 方式2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT REPLACE(ename,SUBSTRING(ename,1,1),LCASE(SUBSTRING(ename,1,1)))</span><br><span class="line">	FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– 方式3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONCAT( LCASE(LEFT(ename,1)) ,SUBSTRING(ename,2))</span><br><span class="line">	FROM emp;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h3><p>#演示数学相关函数</p>
+<p>– <strong>ABS (num) 绝对值</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ABS(-10) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>BIN (decimal_number) 十进制转二进制</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT BIN(10) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>CEILING (num2) 向上取整，得到比num2大的最小整数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CEILING(-1.1) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>CONV(num2,from_base,to_base) 进制转换</strong><br>– 下面的含义是  <strong>8是十进制的8，转成二进制输出</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONV(8,10,2) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– 下面的含义是  <strong>8是十六进制的8，转成二进制输出</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONV(8,16,2) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>FLOOR (num2) 向下取整，得到比num2小的最大整数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT FLOOR(-1.1) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>FORMAT (num,decimal_places) 保留小数位数(四舍五入)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT FORMAT(78.1254582,2) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>HEX (DecimalNumber) 转十六进制</strong></p>
+<p>– <strong>LEAST (num,num2,…) 求最小值</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT LEAST(0,1,-10,4) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>MOD (numerator,denominator) 求余</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MOD(10,3) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>RAND ([seed])  RAND([seed]) 返回随机数 其范围为0&lt;&#x3D;v&lt;&#x3D;1.0</strong><br>– 1.如果使用<strong>RAND()每次返回不同的随机数，在0&lt;&#x3D;v&lt;&#x3D;1.0之间</strong><br>– 2.如果使用<strong>RAND(seed) 返回随机数，范围0&lt;&#x3D;v&lt;&#x3D;1.0</strong>，<strong>如果seed不变，该随机数也不变了</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT RAND(6) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><p>#日期时间相关函数</p>
+<p>– <strong>CURRENT_DATE()    当前日期</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CURRENT_DATE() FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>CURRENT_TIME()    当前时间</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CURRENT_TIME() FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>CURRENT_TIMESTAMP()    当前时间戳</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CURRENT_TIMESTAMP() FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– 创建测试表 信息表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE mes(</span><br><span class="line">	id INT,</span><br><span class="line">	content VARCHAR(32),</span><br><span class="line">	send_time DATETIME);</span><br></pre></td></tr></table></figure>
+
+<p>– 添加一条记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO mes VALUES(1,&#x27;北京新闻&#x27;,CURRENT_TIMESTAMP());</span><br><span class="line">INSERT INTO mes VALUES(2,&#x27;上海新闻&#x27;,NOW());</span><br><span class="line">INSERT INTO mes VALUES(3,&#x27;广州新闻&#x27;,NOW());</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM mes;</span><br><span class="line">SELECT NOW() FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– 应用实例<br>– <strong>显示所有新闻信息，发布日期只显示日期，不显示时间</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT id,content,DATE(send_time) FROM mes;</span><br></pre></td></tr></table></figure>
+
+<p>– 请查询在<strong>10分钟内发布的新闻</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM mes WHERE DATE_ADD(send_time,INTERVAL 10 MINUTE)&gt;=NOW();</span><br><span class="line">SELECT * FROM mes WHERE send_time&gt;= DATE_SUB(NOW(),INTERVAL 10 MINUTE);</span><br></pre></td></tr></table></figure>
+
+<p>– 请在mysql的sql语句中<strong>求出2011-11-11和1990-1-1相差多少天</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATEDIFF(&#x27;2011-11-11&#x27;,&#x27;1990-01-01&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– 请用mysql的sql语句<strong>求出你活了多少天</strong>？【练习】 <strong>2003-09-11 出生</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATEDIFF(NOW(),&#x27;2003-09-11&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– 如果你能活80岁，求出你<strong>还能活多少天</strong>? 【练习】 <strong>2003-09-11 出生</strong><br>– 先求出<strong>活80岁</strong>时，是什么日期<br>– 然后在使用<strong>datediff(x,now())</strong>;<br>– INTERVAL 80 YEAR：YEAR可以是替换成年月日，时分秒</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATEDIFF(DATE_ADD(&#x27;2003-09-11&#x27;,INTERVAL 80 YEAR),NOW()) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>YEAR|MONTH|DAY| DATE (datetimee)：(即返回年|月|日)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT YEAR(NOW()) FROM DUAL;</span><br><span class="line">SELECT MONTH(NOW()) FROM DUAL; </span><br><span class="line">SELECT DAY(NOW()) FROM DUAL;</span><br><span class="line">SELECT MONTH(&#x27;2003-11-10&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>unix_timestamp()：返回的是1970-01-01 到现在的秒数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT UNIX_TIMESTAMP() FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>FROM_UNIXTIME()：可以把一个unix_timestamp秒数，转成指定格式的日期</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT FROM_UNIXTIME(1669349758,&#x27;%Y-%m-%d&#x27;) FROM DUAL;</span><br><span class="line">SELECT FROM_UNIXTIME(1669349758,&#x27;%Y-%m-%d %H:%i:%s&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<h3 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h3><p>#演示加密函数和系统函数<br>– <strong>USER()   查询用户</strong><br>– 可以查看登录到mysql的有哪些用户，以及登录的IP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT USER() FROM DUAL; -- 用户@IP地址</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>DATABASE()   查询当前使用数据库名称</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATABASE();</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>MD5(str)  为字符串算出一个MD5  32位的字符串，常用(用户密码)加密</strong><br>– <strong>root 密码是lby-&gt;加密md5-&gt;在数据库中存放的是加密后的密码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT MD5(&#x27;lby&#x27;) FROM DUAL;</span><br><span class="line">SELECT LENGTH(MD5(&#x27;lby&#x27;)) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– 演示用户表，<strong>存放密码时，是md5</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE lby_user</span><br><span class="line">	(id INT,</span><br><span class="line">	`name` VARCHAR(32) NOT NULL DEFAULT &#x27; &#x27;,</span><br><span class="line">	pwd CHAR(32) NOT NULL DEFAULT &#x27; &#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO lby_user</span><br><span class="line">	VALUES(100,&#x27;李博扬&#x27;,MD5(&#x27;lby&#x27;));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM lby_user;</span><br><span class="line">SELECT * </span><br><span class="line">	FROM lby_user</span><br><span class="line">	WHERE `name`=&#x27;李博扬&#x27; AND pwd=MD5(&#x27;lby&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>PASSWORD(str) –加密函数,在MYSQL数据库的用户密码就是PASSWORD加密的</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT PASSWORD(&#x27;lby&#x27;) FROM DUAL;-- *2DE7B6C45E31629453E39499BDA8A5950CA05900</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212021528487.png" alt="image-20221202152805385"></p>
+<p>– <strong>select * from mysql.user \G 从原文密码str计算并返回密码字符串</strong><br>– <strong>通常用于对mysql数据库的用户密码加密</strong><br>– <strong>mysql.user 表示数据库.表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM mysql.user;</span><br></pre></td></tr></table></figure>
+
+<h3 id="流程控制函数"><a href="#流程控制函数" class="headerlink" title="流程控制函数"></a>流程控制函数</h3><p>#演示流程控制语句<br>– <strong>IF(expr1,expr2,expr3) 如果expr1为True，则返回expr2，否则返回expr3</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT IF(TRUE,&#x27;李白&#x27;,&#x27;杜甫&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>IFNULL(expr1,expr2) 如果expr1不为NULL，则返回expr1，否则返回expr2</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT IFNULL(NULL,&#x27;李白&#x27;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>– <strong>SELECT CASE WHEN expr1 THEN expr2 WHEN expr3 THEN expr4 ELSE expr5 END;[类似多重分支]</strong><br>– <strong>如果expr1为TRUE，则返回expr2，如果expr3为TRUE，返回expr4，否则返回expr5</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT CASE</span><br><span class="line">	WHEN TRUE THEN &#x27;jack&#x27; -- jack</span><br><span class="line">	WHEN FALSE THEN &#x27;tom&#x27;</span><br><span class="line">	ELSE &#x27;mary&#x27; END</span><br></pre></td></tr></table></figure>
+
+
+<p>– 1.查询emp表，如果<strong>comm是null，则显示0.0</strong><br>– 判断<strong>是否为null</strong>，要使用<strong>is null</strong>，判断<strong>不为空</strong>，使用<strong>is not null</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT ename,IF(comm IS NULL,0.0,comm) FROM emp;</span><br><span class="line">SELECT ename,IFNULL(comm,0.0) FROM emp;</span><br></pre></td></tr></table></figure>
+
+<p>– 2.如果emp表的job是<strong>CLERK则显示职员</strong>，如果是<strong>MANAGER则显示经理</strong><br>– 如果是<strong>SALESMAN则显示销售人员</strong>，<strong>其它正常显示</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT ename,(SELECT CASE</span><br><span class="line">		WHEN job=&#x27;clerk&#x27; THEN &#x27;职员&#x27;</span><br><span class="line">		WHEN job=&#x27;manager&#x27; THEN &#x27;经理&#x27;</span><br><span class="line">		WHEN job=&#x27;salesman&#x27; THEN &#x27;销售人员&#x27;</span><br><span class="line">		ELSE  job END) job</span><br><span class="line">	FROM emp;</span><br></pre></td></tr></table></figure>
 
 			<br>
 			
