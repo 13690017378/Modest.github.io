@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="创建，删除，查询数据库与表等基础语句(指令)创建数据库#演示数据库的操作 #启动和关闭数据库 net START mysql  net STOP mysql  #创建一个名为lby_db01的数据库。 #使用指令创建数据库 CREATE DATABASE lby_db01  #删除数据库 DROP DATABASE lby_db01  #创建一个使用utf8字符集的lby_db02数据库 CREA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql">
+<meta property="og:url" content="https://tridiamond.tech/post/MySqlNote.html">
+<meta property="og:site_name" content="Modest">
+<meta property="og:description" content="创建，删除，查询数据库与表等基础语句(指令)创建数据库#演示数据库的操作 #启动和关闭数据库 net START mysql  net STOP mysql  #创建一个名为lby_db01的数据库。 #使用指令创建数据库 CREATE DATABASE lby_db01  #删除数据库 DROP DATABASE lby_db01  #创建一个使用utf8字符集的lby_db02数据库 CREA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="og:image" content="https://tridiamond.tech/img/404.jpg">
+<meta property="article:published_time" content="2022-12-01T10:46:34.866Z">
+<meta property="article:modified_time" content="2023-03-17T13:20:45.399Z">
+<meta property="article:author" content="Humble">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tridiamond.tech/img/404.jpg">
+
+
+<title >MySql</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.0.0-beta.4' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.0.0-beta.4' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"tridiamond.tech","author":"Humble","root":"/","typed_text":null,"theme_version":"2.0.0-beta.4","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"prismjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-03-17 21:20:45"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.0-beta.4" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            Async<span>Theme</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    Home
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    Archives
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            MySql
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        post
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        ThemeAsync
+    </h5>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                Mars
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            12/01
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:46
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Humble
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="创建，删除，查询数据库与表等基础语句-指令"><a href="#创建，删除，查询数据库与表等基础语句-指令" class="headerlink" title="创建，删除，查询数据库与表等基础语句(指令)"></a>创建，删除，查询数据库与表等基础语句(指令)</h2><h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>#演示数据库的操作</p>
+<p>#<strong>启动和关闭</strong>数据库</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">net START mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">net STOP mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#<strong>创建</strong>一个名为lby_db01的数据库。</p>
+<p>#<strong>使用指令创建数据库</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE DATABASE lby_db01<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#<strong>删除</strong>数据库</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP DATABASE lby_db01<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#创建一个<strong>使用utf8字符集</strong>的lby_db02数据库</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE DATABASE lby_db02 CHARACTER SET utf8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#创建一个<strong>使用utf8字符集，并带校对规则</strong>的lby_db03数据库</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE DATABASE lby_db03 CHARACTER SET utf8 COLLATE utf8_bin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#校对规则 <strong>utf8_bin 区分大小写 默认utf8_general_ci 不区分大小写</strong></p>
+<p>#下面是一条查询的sql，<strong>select 表示查询</strong>     *  <strong>表示所有字段</strong>      <strong>FROM表示从哪个表</strong><br>#<strong>WHERE 表示从哪个字段</strong> 		<strong>NAME &#x3D; ‘tom’ 表示查询名字是tom</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM t1 WHERE NAME &#x3D; &#39;tom&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h3><p>#查看<strong>当前数据库服务器</strong>中的<strong>所有数据库</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW DATABASES<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#查看前面创建的lby_db01数据库的<strong>定义信息</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW CREATE DATABASE lby_db01<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#在创建数据库，表的时候，为了<strong>规避关键字，可以使用反引号解决</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE DATABASE &#96;create&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#删除上面创建的create数据库</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP DATABASE &#96;create&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="备份恢复数据库"><a href="#备份恢复数据库" class="headerlink" title="备份恢复数据库"></a>备份恢复数据库</h3><p>#备份，要在<strong>Dos</strong>下执行<strong>mysqldump指令</strong>其实在mysql安装目录下\bin<br>#这个备份的文件，就是对应的sql语句</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysqldump -u root -p -B lby_db02 lby_db03 &gt; C:\\bak.sql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP DATABASE lby_db03;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#恢复数据库(注意：<strong>进入Mysql命令行执行</strong>)</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">source C:\\bak.sql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#第二个恢复方法，直接将bak.sql的内容放到查询编辑器中，执行就可以了</p>
+<p>#<strong>备份数据库的表</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysqldump -u root -p lby_db02 t1 t2 &gt;C:\\bak02.sql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p>#<strong>指令</strong>创建表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE &#96;user&#96; (
+	id INT,
+	&#96;name&#96; VARCHAR(255),
+	&#96;password&#96; VARCHAR(255),
+	birthday DATE)
+	CHARACTER SET utf8 COLLATE utf8_bin ENGINE INNODB;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>简单说明：<strong>utf8</strong>表示这个表的<strong>字符集</strong>，<strong>utf8_bin</strong>表示这个表的<strong>校对规则</strong>，<strong>innodb</strong>表示这个表的<strong>引擎</strong></p>
+<p><strong>character set</strong>：指定表的字符集，若没有指定，则默认为所在数据库的字符集</p>
+<p><strong>collate</strong>：指定表的校对规则，若没有指定，则默认为所在数据库的校对规则</p>
+<p><strong>engine</strong>：指定表的引擎</p>
+<p><strong>练习：</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t15 (
+	id INT,
+	&#96;name&#96; CHAR(32),
+	sex CHAR(32),
+	birthday DATE,
+	entry_date DATETIME,
+	job CHAR(32),
+	Salary DOUBLE,
+	RESUME TEXT) CHARSET utf8 COLLATE utf8_bin ENGINE INNODB;
+SELECT * FROM t15;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 添加一条</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t15 VALUES(100,&#39;李白&#39;,&#39;2000-11-18&#39;,&#39;2018-11-18 11:11:11&#39;,
+&#39;写诗的&#39;,10000,&#39;皇上叫我写诗&#39;,&#39;&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><p>#<strong>添加列</strong><br>– ALTER TABLE tablename<br>– ADD	(column datatype [DEFAULT exper]<br>–	[, column datatype]…);<br>– <strong>员工表t15的基础上增加一个image列，char类型(要求加在resume后面)</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE t15
+ADD	image CHAR(32) NOT NULL DEFAULT &#39;&#39; AFTER RESUME;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DESC employee<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> – <strong>显示表结构，可以查看表的所有列</strong></p>
+<p>#修改列<br>– <strong>修改</strong>job列，<strong>使其长度为60</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE t15
+	MODIFY job VARCHAR(60) NOT NULL DEFAULT &#39; &#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– <strong>删除</strong>sec<strong>列</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE t15
+	DROP sex<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– <strong>表名改为employee</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">RENAME TABLE t15 TO employee<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>修改表的字符集</strong>为utf8</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE employee CHARACTER SET utf8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>列名name修改为user_name</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE employee CHANGE NAME user_name VARCHAR(32) NOT NULL DEFAULT &#39; &#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM employee;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="列类型"><a href="#列类型" class="headerlink" title="列类型"></a>列类型</h2><h3 id="常用数据类型"><a href="#常用数据类型" class="headerlink" title="常用数据类型"></a>常用数据类型</h3><p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212012031662.png" alt="image-20221201203136555" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>#演示整数<br>#说明：表的字符集，校验规则，存储引擎，使用默认<br>#1.如果<strong>没有指定unsigned</strong>，<strong>则TINYINT就是有符号的</strong>(-128~127)，如果没有符号(0-255)<br>#2.如果<strong>指定unsigned</strong>，<strong>则TINYINT就是无符号</strong>0-255</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t3 (
+	id TINYINT);
+CREATE TABLE t4 (
+	id TINYINT UNSIGNED);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t3 VALUES(128);#这是非常简单的添加语句，添加失败，超过tinyint范围，因为这是带符号的
+
+SELECT * FROM t3
+INSERT INTO t4 VALUES(255);#添加成功
+SELECT * FROM t4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="bit"><a href="#bit" class="headerlink" title="bit"></a>bit</h3><p>#演示bit类型使用<br>#说明<br>#1.bit(m) <strong>m在1-64</strong><br>#2.添加数据 范围 <strong>按照你给的位数来确定</strong>，比如<strong>m&#x3D;8表示一个字节</strong> 0~255<br>#3.显示按照bit<br>#4.查询时，仍然可以<strong>按照数来查询</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t5 (num BIT(8));
+INSERT INTO t5 VALUES(255);
+SELECT * FROM t5
+SELECT * FROM t5 WHERE num &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="小数型"><a href="#小数型" class="headerlink" title="小数型"></a>小数型</h3><p>#演示decimal类型，float，double使用（一般使用<strong>double</strong>或者<strong>decimal</strong>，因为其<strong>精度更高</strong>）<br>#创建表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t6 (
+	num1 FLOAT,
+	num2 DOUBLE,
+	num3 DECIMAL(30,20));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#decimal(m,n)如果<strong>没有</strong>给m，n赋值，那么会<strong>默认m为10，n为0</strong><br>#添加数据</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t6 VALUES(88.12345678912345,88.12345678912345,88.12345678912345);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM t6;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#decimal可以存放很大的数</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t7 (
+	num DECIMAL(65));
+INSERT INTO t7 VALUES(899999999999999999999999999999999999999999999999999999999999999);
+SELECT * FROM t7;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t8 (
+	num BIGINT UNSIGNED);
+INSERT INTO t8 VALUES(899999999999999999999999999999999999999999999999999999999999999);
+SELECT * FROM t8;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212012032764.png" alt="image-20221201203217730" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>#演示字符串类型使用char varchar<br>#注释的快捷键 shift+ctrl+c，取消注释 shift+ctrl+r<br>– CHAR(size)<br>– <strong>固定</strong>长度字符串 <strong>最大255字符</strong><br>– VARCHAR(size)      0~65535(<strong>字节，而不是字符</strong>)<br>– <strong>可变</strong>长度字符串 <strong>最大65532字节</strong>   【<strong>utf8编码</strong>最大21844字符 <strong>1-3个字节用于记录大小</strong>】<br>– 如果表的编码是 <strong>utf8</strong> varchar(size) size&#x3D;(65535-3) &#x2F; 3 &#x3D; <strong>21844</strong><br>– 如果表的编码是 <strong>gbk</strong> varchar(size) size&#x3D;(65535-3) &#x2F; 2 &#x3D; <strong>32766</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t9 (
+	&#96;name&#96; CHAR(255));
+CREATE TABLE t10 (
+	&#96;name&#96; VARCHAR(32766) CHARACTER SET gbk);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#演示<strong>字符串类型的使用细节</strong><br>#1.char(4) 和 varchar(4) 这个4表示的是<strong>字符</strong>，而<strong>不是</strong>字节，<strong>不区分</strong>字符是汉字还是字母<br>#2.char(4)是<strong>定长</strong>(固定的大小)，就是说，即使你插入’aa’，也会占用分配的4个字节的空间<br>#3.varchar(4)是<strong>变长</strong>(变化的大小)，就是说，如果你插入了’aa’，实际占用空间大小并不是4个字符<br>– 而是<strong>按照实际占用空间来分配</strong><br>– varchar本身还需要<strong>1-3个字节来记录存放内容长度</strong><br>– <strong>L(实际数据大小)+(1-3)字节</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t11 (
+	&#96;name&#96; CHAR(4));
+INSERT INTO t11 VALUES(&#39;abcd&#39;);
+
+INSERT INTO t11 VALUES(&#39;白居易号&#39;);
+
+SELECT * FROM t11;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t12 (
+	&#96;name&#96; VARCHAR(4));
+INSERT INTO t12 VALUES(&#39;abcd&#39;);
+
+INSERT INTO t12 VALUES(&#39;白居易号&#39;);
+
+INSERT INTO t12 VALUES(&#39;ab李白&#39;);
+
+SELECT * FROM t12;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#4.什么时候使用char，什么时候使用varchar<br>– 如果数据<strong>定长</strong>，推荐使用<strong>char</strong>，比如md5的密码，邮编，手机号，身份证号码等.char(32)<br>– 如果一个字段的长度是<strong>不确定</strong>，我们使用<strong>varchar</strong>，比如留言，文章<br>– <strong>查询速度：char&gt;varchar</strong></p>
+<p>#5.在存放<strong>文本</strong>时，也可以使用<strong>Text</strong>数据类型<br>– 可以将Text列视为VARCHAR列，注意Text<strong>不能有默认值</strong>，大小0-2^16字节<br>– 如果希望存放更多字符，可以选择<br>– MEDIUMTEXT 0-2^24 或者 LONGTEXT 0~2^32</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t13 (content TEXT, content2 MEDIUMTEXT, content3 LONGTEXT);
+INSERT INTO t13 VALUES(&#39;李白是诗神&#39;,&#39;白居易是诗人&#39;,&#39;杜甫是散人~~&#39;);
+SELECT * FROM t13;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="日期类"><a href="#日期类" class="headerlink" title="日期类"></a>日期类</h3><p>#演示时间相关的类型<br>#创建一张表，date，datetime，<strong>timestamp</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t14 (
+	birthday DATE, -- 生日
+	job_time DATETIME, -- 记录年月日 时分秒
+	login_time TIMESTAMP
+	 NOT NULL DEFAULT CURRENT_TIMESTAMP 
+	 ON UPDATE CURRENT_TIMESTAMP); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 登录时间，如果希望login_time列自动更新，需要<strong>配置</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM t14;
+	INSERT INTO t14(birthday,job_time)
+	VALUES(&#39;2022-11-18&#39;,&#39;2022-11-18 20:41:10&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 如果我们更新了t14表的某条记录，login_time列会自动的<strong>以当前时间进行更新</strong></p>
+<h2 id="CRUD语句"><a href="#CRUD语句" class="headerlink" title="CRUD语句"></a>CRUD语句</h2><h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><p>#<strong>练习</strong>insert语句<br>– 创建一张商品表goods (id int , goods_name , varchar(10) , price double);<br>– 添加两条记录</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE &#96;goods&#96; (
+	id INT,
+	goods_name VARCHAR(10),
+	price DOUBLE);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 添加数据</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; (id,goods_name,price)
+	VALUES(10,&#39;华为手机&#39;,5000);
+INSERT INTO &#96;goods&#96; (id,goods_name,price)
+	VALUES(20,&#39;苹果手机&#39;,9000);
+SELECT * FROM &#96;goods&#96;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE &#96;goods2&#96; (
+	id INT,
+	goods_name VARCHAR(10),
+	price DOUBLE NOT NULL DEFAULT 100);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#追加练习<br>– 使用insert语句向表employee中插入2个员工的信息</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO employee (id,user_name,birthday,entry_date,job,Salary,&#96;resume&#96;)
+	VALUES(101,&#39;杜甫&#39;,&#39;1998-11-21&#39;,&#39;1998-11-28 21:00:00&#39;,&#39;写诗的&#39;,6000,&#39;为百姓写诗&#39;);
+INSERT INTO employee (id,user_name,birthday,entry_date,job,Salary,&#96;resume&#96;)
+	VALUES(102,&#39;白居易&#39;,&#39;2016-11-21&#39;,&#39;2016-11-28 21:00:00&#39;,&#39;写诗的&#39;,6000,&#39;为历史写诗&#39;);
+SELECT * FROM employee;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#说明<strong>insert语句的细节</strong><br>– 1.<strong>插入的数据应与字段的数据类型相同</strong><br>–	比如<strong>把’abc’添加到int类型会错误</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; (id,goods_name,price)**
+	VALUES(&#39;abc&#39;,&#39;小米手机&#39;,4000);#Incorrect integer value
+INSERT INTO &#96;goods&#96; (id,goods_name,price)**
+	VALUES(&#39;30&#39;,&#39;小米手机&#39;,4000);#success,底层会尝试转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 2.<strong>数据的长度应在列的规定范围内</strong>，例如：不能将一个长度为80的字符串加入到长度为40的列中</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; (id,goods_name,price)
+	VALUES(40,&#39;vivovivovivovivovivovivo手机&#39;,3000);#Data too long for column<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 3.<strong>在values中列出的数据位置必须与被加入的列的排序位置相对应</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; (id,goods_name,price)
+	VALUES(&#39;vivo手机&#39;,40,3000);#Incorrect integer value
+INSERT INTO &#96;goods&#96; (goods_name,id,price)
+	VALUES(&#39;vivo手机&#39;,40,3000);#success<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 4.<strong>字符和日期型数据应包含在单引号中</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; (id,goods_name,price)
+	VALUES(40,vivo手机,3000);#Unknown column 应该&#39;vivo手机&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 5.**列可以插入空值[前提是该字段允许为空]**，insert into table_name values(null)</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; (id,goods_name,price)
+	VALUES(50,&#39;oppo手机&#39;,NULL);#success 因为我们创建表的时候没设置不为空 即(not null)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 6.<strong>insert into table_name (列名…) values (),(),()  形式添加多条记录</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; (id,goods_name,price)
+	VALUES(60,&#39;三星手机&#39;,6000),(60,&#39;海尔手机&#39;,7000);#success<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 7.<strong>如果是给表中的所有字段添加数据，可以不写前面的字段名称</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods&#96; 
+	VALUES(70,&#39;IBM手机&#39;,5000);#success<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 8.<strong>默认值的使用，当不给某个字段值时，如果有默认值就会添加默认值，否则报错</strong><br>–	<strong>如果某个列，没有指定not null，那么添加数据时，没有给定值，则会默认给null</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO &#96;goods2&#96; (id,goods_name)
+	VALUES(80,&#39;格力手机&#39;);#success,并且自动给price添加默认值100
+SELECT * FROM &#96;goods2&#96;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>#演示update语句<br>– 要求：在上面创建的employee表中修改表中的记录<br>– 1.将<strong>所有员工薪水修改为5000元</strong>.如果<strong>没有带where</strong>这个条件，会<strong>修改所有的记录</strong>，因此使用要小心</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE employee SET Salary &#x3D; 5000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 2.将<strong>姓名为李白的员工薪水修改为8000元</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE employee 
+	SET salary &#x3D; 3000 
+	WHERE user_name &#x3D; &#39;李白&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<p>– 3.将<strong>姓名为杜甫的员工在原有薪水基础上增加2000元</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE employee
+	SET salary &#x3D; salary + 2000
+	WHERE user_name &#x3D; &#39;杜甫&#39;;
+	
+SELECT * FROM employee;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#update语句<strong>使用细节</strong><br>– 1.update语法可以用<strong>新值</strong>更新原有表行中的各列<br>– 2.set子句指示要修改哪些列和要给予哪些值<br>– 3.where子句<strong>指定</strong>应更新哪些行。如<strong>没有where</strong>子句，则<strong>更新所有的行(记录)<strong>，因此使用时要小心<br>– 4.如果需要</strong>修改多个字段</strong>，可以通过<strong>set 字段1&#x3D;值1，字段2&#x3D;值2…..</strong></p>
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p>#delete语句演示<br>– <strong>删除表中名称为’杜甫’的记录</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DELETE FROM employee
+	WHERE user_name &#x3D; &#39;杜甫&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 删除表中所有记录<br>–	<strong>如不需要where子句，将删除表中所有数据</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DELETE FROM employee;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>#delete语句<strong>使用细节</strong><br>– <strong>delete语句不能删除某一列的值</strong>(可使用update 设为null或者’’)</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE employee SET job &#x3D; &#39;&#39; WHERE user_name&#x3D;&#39;杜甫&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 使用<strong>delete语句仅删除记录，不删除表本身</strong>。如要<strong>删除表，使用drop table语句</strong>。<br>– 	<strong>drop table 表名;</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP TABLE employee;
+SELECT * FROM employee;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><h4 id="1-0"><a href="#1-0" class="headerlink" title="1.0"></a>1.0</h4><p>– select 语句【<strong>重点 难点</strong>】<br>– <strong>格式:</strong><br><strong>– SELECT [distinct] * {column1,column2,column3..}</strong><br><strong>– 		FROM table_name;</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE student (
+	id INT NOT NULL DEFAULT 1,
+	&#96;name&#96; VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,
+	chinese FLOAT NOT NULL DEFAULT 0.0,
+	english FLOAT NOT NULL DEFAULT 0.0,
+	math FLOAT NOT NULL DEFAULT 0.0);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO student 
+	VALUES(1,&#39;李白&#39;,100,90,80),(2,&#39;杜甫&#39;,100,90,90),(3,&#39;白居易&#39;,95,80,80),(4,&#39;王维&#39;,95,80,80),
+	(5,&#39;赵云&#39;,82,84,67),(6,&#39;关羽&#39;,88,98,90),(7,&#39;张飞&#39;,67,98,56),(8,&#39;李世民&#39;,100,90,95);
+	
+SELECT * FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 查询表中<strong>所有</strong>学生的信息</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询表中<strong>所有</strong>学生的<strong>姓名和对应的英语成绩</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT &#96;name&#96;,english FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>过滤表中重复数据 distinct</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DISTINCT english FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>要查询的记录，每个字段都相同，才会去重</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DISTINCT &#96;name&#96;,english FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="2-0"><a href="#2-0" class="headerlink" title="2.0"></a>2.0</h4><p>#<strong>select语句的使用</strong><br>– 使用表达式对查询的列进行运算<br>– <strong>SELECT * |{column1|expression,column2|expression…}</strong><br>– 		<strong>FROM table_name;</strong></p>
+<p>– 在select语句中可使用as语句<br>– <strong>SELECT column_name as 别名 from 表名;</strong></p>
+<p>– <strong>统计每个学生的总分</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT &#96;name&#96;,(chinese+english+math) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 在<strong>所有学生总分加10分</strong>的情况</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT &#96;name&#96;,(chinese+english+math+10) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>使用别名表示学生分数</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT &#96;name&#96; AS &#39;名字&#39;,(chinese+english+math+10) AS total_score FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-0"><a href="#3-0" class="headerlink" title="3.0"></a>3.0</h4><p>#select语句<br>– 查询<strong>姓名为赵云的学生</strong>成绩</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE &#96;name&#96;&#x3D;&#39;赵云&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询<strong>英语成绩大于90分</strong>的同学</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE english&gt;90;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询<strong>总分大于200分</strong>的所有同学</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE (chinese+english+math)&gt;200;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询<strong>math大于60并且(and)id大于4</strong>的学生成绩</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE math&gt;60 AND id&gt;4;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询<strong>英语成绩大于语文成绩</strong>的同学</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE english&gt;chinese;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询<strong>总分大于200分并且数学成绩小于语文成绩的姓李的学生</strong><br>– <strong>李%表示名字以李开头的就可以</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE
+	(chinese+math+english)&gt;200 AND math&lt;chinese
+	 AND &#96;name&#96; LIKE &#39;李%&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<p>– 查询<strong>英语成绩在80-90之间</strong>的同学</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE english&gt;&#x3D;80 AND english&lt;&#x3D;90;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>between..and…是一个闭区间</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE english BETWEEN 80 AND 90;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询<strong>数学分数为89，90，91</strong>的同学</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE math BETWEEN 89 AND 91;
+SELECT * FROM student WHERE math&#x3D;89 OR math&#x3D;90 OR math&#x3D;91;
+SELECT * FROM student WHERE math IN(89,90,91);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 查询<strong>所有姓李的学生成绩</strong>(<strong>%表示任意多个字符</strong>)</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE &#96;name&#96; LIKE &#39;李%&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 查询<strong>数学分&gt;80，语文成绩&gt;80</strong>的同学</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM student WHERE math&gt;80 AND chinese&gt;80;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h3><p>#演示mysql统计函数的使用<br>– <strong>count</strong><br>– 统计<strong>一个班级****共有多少学生</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">SELECT COUNT(*) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 统计<strong>数学成绩大于90</strong>的有多少个</p>
+<pre class="line-numbers language-none"><code class="language-none">SELECT COUNT(*) FROM student WHERE math&gt;90;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 统计<strong>总分大于250</strong>的人数有多少</p>
+<pre class="line-numbers language-none"><code class="language-none">SELECT COUNT(*) FROM student WHERE (math+chinese+english)&gt;250;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>count(*)<strong>和</strong>count(列)<strong>的区别<br>– 解释：</strong>count(*)返回满足条件的记录的行数</strong><br>– <strong>count(列)：统计满足条件的某列有多少个，但是会排除为null</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t15 (
+	&#96;name&#96; VARCHAR(20));
+INSERT INTO t15 VALUES(&#39;tom&#39;);
+INSERT INTO t15 VALUES(&#39;jack&#39;);
+INSERT INTO t15 VALUES(&#39;mary&#39;);
+INSERT INTO t15 VALUES(NULL);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM t15;
+SELECT COUNT(*) FROM t15;-- 4
+SELECT COUNT(&#96;name&#96;) FROM t15;-- 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>sum</strong><br>– 统计一个班级<strong>数学总成绩</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT SUM(math) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 统计一个班级<strong>语文，英语，数学各科的总成绩</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT SUM(math),SUM(english),SUM(chinese) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 统计一个班级<strong>语文，英语，数学的成绩总和</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT SUM(math+english+chinese) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 统计一个班级<strong>语文成绩平均分</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT SUM(chinese)&#x2F;COUNT(*) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>avg</strong><br>– 求一个班级<strong>数学平均分</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT AVG(math) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 求一个班级总分<strong>平均分</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT AVG(math+english+chinese) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>Max&#x2F;min</strong><br>– 求<strong>班级最高分和最低分</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT MAX(math+chinese+english) FROM student;
+SELECT MIN(math+chinese+english) FROM student;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="分组函数"><a href="#分组函数" class="headerlink" title="分组函数"></a>分组函数</h3><p>#演示group by的使用</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE dept(&#x2F;*部门表*&#x2F;
+deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
+dname VARCHAR(20)NOT NULL DEFAULT &#39;&#39; &#39;&#39;,
+1oc VARCHAR(13)NOT NULL DEFAULT &#39;&#39; &#39;&#39;);
+INSERT INTO dept VALUES(10,&#39;ACCOUNTING&#39;,&#39;NEW YORK&#39;),(20,&#39;RESEARCH&#39;,&#39;DALLAS&#39;),(30,&#39;SALES&#39;,&#39;CHICAGO&#39;),(40,&#39;OPERATIONS&#39;,&#39;BOSTON&#39;);
+SELECT * FROM dept;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#创建表EMP雇员</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP TABLE emp;
+CREATE TABLE emp
+(empno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,&#x2F;*编号*&#x2F;
+ename VARCHAR(20)NOT NULL DEFAULT &#39;&#39; &#39;&#39;,&#x2F;*名字*&#x2F;
+job VARCHAR(9)NOT NULL DEFAULT &#39;&#39; &#39;&#39;,&#x2F;*工作*&#x2F;
+mgr MEDIUMINT UNSIGNED,&#x2F;*上级编号*&#x2F;
+hiredate DATE NOT NULL,&#x2F;*入职时间*&#x2F;
+sa1 DECIMAL(7,2) NOT NULL,&#x2F;*薪水*&#x2F;
+comm DECIMAL(7,2),&#x2F;*红利*&#x2F;
+deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0&#x2F;*部门编号*&#x2F;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 添加测试数据</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO emp VALUES(7369,&#39;SMITH&#39;,&#39;CLERK&#39;,7902,&#39;1990-12-17&#39;,800.00,NULL,20),
+(7499,&#39;ALLEN&#39;,&#39;SALESMAN&#39;,7698,&#39;1991-2-20&#39;,1600.00,300.00,30),
+(7521,&#39;WARD&#39;,&#39;SALESMAN&#39;,7698,&#39;1991-2-22&#39;,1250.00,500.00,30),
+(7566,&#39;J0NES&#39;,&#39;MANAGER&#39;,7839,&#39;1991-4-2&#39;,2975.00,NULL,20),
+(7654,&#39;MARTIN&#39;,&#39;SALESMAN&#39;,7698,&#39;1991-9-28&#39;,1250.00,1400.00,30),
+(7698,&#39;BLAKE&#39;,&#39;MANAGER&#39;,7839,&#39;1991-5-1&#39;,2850.00,NULL,30),
+(7782,&#39;CLARK&#39;,&#39;MANAGER&#39;,7839,&#39;1991-6-9&#39;,2450.00,NULL,10),
+(7788,&#39;SC0TT&#39;,&#39;ANALYST&#39;,7566,&#39;1997-4-19&#39;,3000.00,NULL,20),
+(7839,&#39;KING&#39;,&#39;PRESIDENT&#39;,NULL,&#39;1991-11-17&#39;,5000.00,NULL,10),
+(7844,&#39;TURNER&#39;,&#39;SALESMAN&#39;,7698,&#39;1991-9-8&#39;,1500.00,NULL,30),
+(7900,&#39;JAMES&#39;,&#39;CLERK&#39;,7698,&#39;1991-12-3&#39;,950.00,NULL,30),
+(7902,&#39;FORD&#39;,&#39;ANALYST&#39;,7566,&#39;1991-12-3&#39;,3000.00,NULL,20),
+(7934,&#39;MILLER&#39;,&#39;CLERK&#39;,7782,&#39;1992-1-23&#39;,1300.00,NULL,10);
+
+SELECT * FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#工资级别表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE salgrade(
+grade MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,&#x2F;*工资级别*&#x2F;
+losal DECIMAL (17,2) NOT NULL,&#x2F;*该级别的最低工资*&#x2F;
+hisal DECIMAL(17,2) NOT NULL &#x2F;*该级别的最高工资*&#x2F;
+);
+INSERT INTO salgrade VALUES(1,700,1200);
+INSERT INTO salgrade VALUES(2,1201,1400);
+INSERT INTO salgrade VALUES(3,1401,2000);
+INSERT INTO salgrade VALUES(4,2001,3000);
+INSERT INTO salgrade VALUES(5,3001,9999);
+
+SELECT * FROM salgrade;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 演示<strong>group by + having</strong><br>– <strong>having子句用于限制分组显示结果</strong></p>
+<p>– 如何显示<strong>每个部门的平均工资和最高工资</strong><br>– <strong>avg(sa1) max(sa1)</strong><br>– <strong>按照部门来分组查询</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT AVG(sa1),MAX(sa1),deptno 
+	FROM emp GROUP BY deptno;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 显示<strong>每个部门的每种岗位的平均工资和最低工资</strong><br>– <strong>avg(sa1) min(sa1)</strong><br>– <strong>按照部门来分组查询</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT AVG(sa1),MIN(sa1),deptno,job
+	FROM emp GROUP BY deptno,job;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 显示<strong>平均工资低于2000的部门号和它的平均工资</strong><br>– <strong>化繁为简，各个击破</strong><br>– 1.显示<strong>各个部门的平均工资和部门号</strong><br>– 2.<strong>在1的结果基础上，进行过滤，保留平均工资小于2000的</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT AVG(sa1),deptno 
+		FROM emp GROUP BY deptno
+		HAVING AVG(sa1)&lt;2000;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>使用别名</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT AVG(sa1) AS avg_sal,deptno 
+		FROM emp GROUP BY deptno
+		HAVING avg_sal&lt;2000;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><p>#字符串函数使用演示    使用emp表来演示<br>– <strong>CHARSET(str) 返回字符串字符集</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CHARSET(ename) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>CONCAT (string2 […..]) 连接字符串,将多个列拼接成一列</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CONCAT(ename,&#39; job is &#39;,job) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>INSTR (string,substring) 返回substring在string中出现的位置，没有返回0</strong><br>– <strong>dual亚元表，系统表 可以作为测试表使用</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT INSTR(&#39;libai&#39;,&#39;li&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>UCASE (string2) 转换为大写</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT UCASE(ename) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>LCASE (string2) 转换为小写</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT LCASE(ename) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>LEFT (string2,length) 从string2中的左边起取length个字符</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT LEFT(ename,2) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>RIGHT (string2,length) 从string2中的右边起取length个字符</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT RIGHT(ename,2) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>LENGTH (string) string长度[按照字节返回]  比如’李白’会返回6（utf8字符集）</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT LENGTH(ename) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>REPLACE (str,search_str,replace_str)</strong><br>– <strong>在str中用replace_str替换search_str</strong><br>– 如果是manager就替换成经理</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename ,REPLACE(job,&#39;MANAGER&#39;,&#39;经理&#39;) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>STRCMP (string1,string2) 逐字符比较两字符串大小</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT STRCMP(&#39;hsp&#39;,&#39;jsp&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>SUBSTRING (str，position，[length])</strong><br>– <strong>从str的position开始【从1开始计算】，取length个字符</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT SUBSTRING(ename ,1,2) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>LTRIM (string2) RTRIM (string2) 去除前端空格或者后端空格</strong><br>– <strong>TRIM(string) 去除前后端空格</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT LTRIM(&#39;      李白是诗人&#39;) FROM DUAL;
+SELECT LTRIM(&#39;李白是诗人      &#39;) FROM DUAL;
+SELECT LTRIM(&#39;      李白是诗人       &#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>以首字母小写的方式显示所有员工的姓名</strong><br>– 方式1</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CONCAT( LCASE(SUBSTRING(ename,1,1)) ,SUBSTRING(ename,2))
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 方式2</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT REPLACE(ename,SUBSTRING(ename,1,1),LCASE(SUBSTRING(ename,1,1)))
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 方式3</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CONCAT( LCASE(LEFT(ename,1)) ,SUBSTRING(ename,2))
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h3><p>#演示数学相关函数</p>
+<p>– <strong>ABS (num) 绝对值</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ABS(-10) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>BIN (decimal_number) 十进制转二进制</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT BIN(10) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>CEILING (num2) 向上取整，得到比num2大的最小整数</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CEILING(-1.1) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>CONV(num2,from_base,to_base) 进制转换</strong><br>– 下面的含义是  <strong>8是十进制的8，转成二进制输出</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CONV(8,10,2) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 下面的含义是  <strong>8是十六进制的8，转成二进制输出</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CONV(8,16,2) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>FLOOR (num2) 向下取整，得到比num2小的最大整数</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT FLOOR(-1.1) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>FORMAT (num,decimal_places) 保留小数位数(四舍五入)</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT FORMAT(78.1254582,2) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>HEX (DecimalNumber) 转十六进制</strong></p>
+<p>– <strong>LEAST (num,num2,…) 求最小值</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT LEAST(0,1,-10,4) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>MOD (numerator,denominator) 求余</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT MOD(10,3) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>RAND ([seed])  RAND([seed]) 返回随机数 其范围为0&lt;&#x3D;v&lt;&#x3D;1.0</strong><br>– 1.如果使用<strong>RAND()每次返回不同的随机数，在0&lt;&#x3D;v&lt;&#x3D;1.0之间</strong><br>– 2.如果使用<strong>RAND(seed) 返回随机数，范围0&lt;&#x3D;v&lt;&#x3D;1.0</strong>，<strong>如果seed不变，该随机数也不变了</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT RAND(6) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><p>#日期时间相关函数</p>
+<p>– <strong>CURRENT_DATE()    当前日期</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CURRENT_DATE() FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>CURRENT_TIME()    当前时间</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CURRENT_TIME() FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>CURRENT_TIMESTAMP()    当前时间戳</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CURRENT_TIMESTAMP() FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 创建测试表 信息表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE mes(
+	id INT,
+	content VARCHAR(32),
+	send_time DATETIME);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 添加一条记录</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO mes VALUES(1,&#39;北京新闻&#39;,CURRENT_TIMESTAMP());
+INSERT INTO mes VALUES(2,&#39;上海新闻&#39;,NOW());
+INSERT INTO mes VALUES(3,&#39;广州新闻&#39;,NOW());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM mes;
+SELECT NOW() FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 应用实例<br>– <strong>显示所有新闻信息，发布日期只显示日期，不显示时间</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT id,content,DATE(send_time) FROM mes;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 请查询在<strong>10分钟内发布的新闻</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM mes WHERE DATE_ADD(send_time,INTERVAL 10 MINUTE)&gt;&#x3D;NOW();
+SELECT * FROM mes WHERE send_time&gt;&#x3D; DATE_SUB(NOW(),INTERVAL 10 MINUTE);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 请在mysql的sql语句中<strong>求出2011-11-11和1990-1-1相差多少天</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DATEDIFF(&#39;2011-11-11&#39;,&#39;1990-01-01&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 请用mysql的sql语句<strong>求出你活了多少天</strong>？【练习】 <strong>2003-09-11 出生</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DATEDIFF(NOW(),&#39;2003-09-11&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 如果你能活80岁，求出你<strong>还能活多少天</strong>? 【练习】 <strong>2003-09-11 出生</strong><br>– 先求出<strong>活80岁</strong>时，是什么日期<br>– 然后在使用<strong>datediff(x,now())</strong>;<br>– INTERVAL 80 YEAR：YEAR可以是替换成年月日，时分秒</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DATEDIFF(DATE_ADD(&#39;2003-09-11&#39;,INTERVAL 80 YEAR),NOW()) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>YEAR|MONTH|DAY| DATE (datetimee)：(即返回年|月|日)</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT YEAR(NOW()) FROM DUAL;
+SELECT MONTH(NOW()) FROM DUAL; 
+SELECT DAY(NOW()) FROM DUAL;
+SELECT MONTH(&#39;2003-11-10&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>unix_timestamp()：返回的是1970-01-01 到现在的秒数</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT UNIX_TIMESTAMP() FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>FROM_UNIXTIME()：可以把一个unix_timestamp秒数，转成指定格式的日期</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT FROM_UNIXTIME(1669349758,&#39;%Y-%m-%d&#39;) FROM DUAL;
+SELECT FROM_UNIXTIME(1669349758,&#39;%Y-%m-%d %H:%i:%s&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h3><p>#演示加密函数和系统函数<br>– <strong>USER()   查询用户</strong><br>– 可以查看登录到mysql的有哪些用户，以及登录的IP</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT USER() FROM DUAL; -- 用户@IP地址<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>DATABASE()   查询当前使用数据库名称</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DATABASE();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>MD5(str)  为字符串算出一个MD5  32位的字符串，常用(用户密码)加密</strong><br>– <strong>root 密码是lby-&gt;加密md5-&gt;在数据库中存放的是加密后的密码</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT MD5(&#39;lby&#39;) FROM DUAL;
+SELECT LENGTH(MD5(&#39;lby&#39;)) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 演示用户表，<strong>存放密码时，是md5</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE lby_user
+	(id INT,
+	&#96;name&#96; VARCHAR(32) NOT NULL DEFAULT &#39; &#39;,
+	pwd CHAR(32) NOT NULL DEFAULT &#39; &#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO lby_user
+	VALUES(100,&#39;李博扬&#39;,MD5(&#39;lby&#39;));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM lby_user;
+SELECT * 
+	FROM lby_user
+	WHERE &#96;name&#96;&#x3D;&#39;李博扬&#39; AND pwd&#x3D;MD5(&#39;lby&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>PASSWORD(str) –加密函数,在MYSQL数据库的用户密码就是PASSWORD加密的</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT PASSWORD(&#39;lby&#39;) FROM DUAL;-- *2DE7B6C45E31629453E39499BDA8A5950CA05900<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212021528487.png" alt="image-20221202152805385" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>– <strong>select * from mysql.user \G 从原文密码str计算并返回密码字符串</strong><br>– <strong>通常用于对mysql数据库的用户密码加密</strong><br>– <strong>mysql.user 表示数据库.表</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM mysql.user;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="流程控制函数"><a href="#流程控制函数" class="headerlink" title="流程控制函数"></a>流程控制函数</h3><p>#演示流程控制语句<br>– <strong>IF(expr1,expr2,expr3) 如果expr1为True，则返回expr2，否则返回expr3</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT IF(TRUE,&#39;李白&#39;,&#39;杜甫&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>IFNULL(expr1,expr2) 如果expr1不为NULL，则返回expr1，否则返回expr2</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT IFNULL(NULL,&#39;李白&#39;) FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>SELECT CASE WHEN expr1 THEN expr2 WHEN expr3 THEN expr4 ELSE expr5 END;[类似多重分支]</strong><br>– <strong>如果expr1为TRUE，则返回expr2，如果expr3为TRUE，返回expr4，否则返回expr5</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT CASE
+	WHEN TRUE THEN &#39;jack&#39; -- jack
+	WHEN FALSE THEN &#39;tom&#39;
+	ELSE &#39;mary&#39; END<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>– 1.查询emp表，如果<strong>comm是null，则显示0.0</strong><br>– 判断<strong>是否为null</strong>，要使用<strong>is null</strong>，判断<strong>不为空</strong>，使用<strong>is not null</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,IF(comm IS NULL,0.0,comm) FROM emp;
+SELECT ename,IFNULL(comm,0.0) FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 2.如果emp表的job是<strong>CLERK则显示职员</strong>，如果是<strong>MANAGER则显示经理</strong><br>– 如果是<strong>SALESMAN则显示销售人员</strong>，<strong>其它正常显示</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,(SELECT CASE
+		WHEN job&#x3D;&#39;clerk&#39; THEN &#39;职员&#39;
+		WHEN job&#x3D;&#39;manager&#39; THEN &#39;经理&#39;
+		WHEN job&#x3D;&#39;salesman&#39; THEN &#39;销售人员&#39;
+		ELSE  job END) job
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="查询增强"><a href="#查询增强" class="headerlink" title="查询增强"></a>查询增强</h3><p>#查询加强<br>– 使用where子句<br>– 如何查找1992.1.1后入职的员工<br>– 在mysql中，<strong>日期类型可以直接比较</strong>，需要注意格式</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	WHERE hiredate &gt; &#39;1992-1-1&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 如何使用<strong>like</strong>操作符<br>– <strong>%表示0到多个字符</strong>  <strong>_表示单个字符</strong><br>– 如何显示<strong>首字符为S</strong>的员工姓名和工资</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1
+	FROM emp
+	WHERE ename LIKE &#39;S%&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 如何显示<strong>第三个字符为大写O</strong>的所有员工的姓名和工资</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1 FROM emp
+	WHERE ename LIKE &#39;__0%&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 如何<strong>显示没有上级的雇员的情况</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	WHERE mgr IS NULL;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 查询<strong>表结构</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DESC emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 使用<strong>order by</strong>子句<br>– 如何按照<strong>工资从低到高的顺序</strong>[升序]，显示雇员的信息</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	ORDER BY sa1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 按照<strong>部门号升序而雇员的工资降序</strong>排列，显示雇员信息</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	ORDER BY deptno ASC,sa1 DESC;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h3><p>#分页查询<br>– <strong>按雇员的id号升序取出</strong>，<strong>每页显示3条记录</strong>，请分别显示第1页，第2页，第2页<br>– 第1页</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	ORDER BY empno
+	LIMIT 0,3;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 第2页</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	ORDER BY empno
+	LIMIT 3,3;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 第3页</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	ORDER BY empno
+	LIMIT 6,3;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 推导一个<strong>公式</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	ORDER BY empno<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>​	<strong>LIMIT 每页显示记录数 * (第几页—1)，每页显示记录数</strong><br>– 练习</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp
+	ORDER BY empno DESC
+	LIMIT 20,5;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="分组增强"><a href="#分组增强" class="headerlink" title="分组增强"></a>分组增强</h3><p>#增强group by的使用</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 1.显示每种岗位的雇员总数，平均工资</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT COUNT(*),job,AVG(sa1) FROM emp
+	GROUP BY job;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 2.显示雇员总数，以及获得补助的雇员数<br>– 思路：获得补助的雇员数就是comm列为非null，就是count(),如果该列的值为null，是不会统计的</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT COUNT(*),COUNT(comm) 
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 扩展要求 统计没有获得补助的雇员数</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT COUNT(*),COUNT(IF(comm IS NULL,1,NULL))
+	FROM emp;
+SELECT COUNT(*),COUNT(*)-COUNT(comm)
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 3.显示<strong>管理者的总人数</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT COUNT(DISTINCT mgr)
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 4.显示<strong>雇员工资的最大差额</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT MAX(sa1)-MIN(sa1)
+	FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><h3 id="笛卡儿集"><a href="#笛卡儿集" class="headerlink" title="笛卡儿集"></a>笛卡儿集</h3><p>#<strong>多表查询</strong><br>– 显示雇员名，雇员工资及所在部门的名字[<strong>笛卡儿集</strong>]<br>&#x2F;*<br>    分析<br>    1.雇员名，雇员工资来自<strong>emp表</strong><br>    2.部门的名字来自<strong>dept表</strong><br>    3.需求对emp和dept查询<br>    *&#x2F;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM emp,dept;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 在默认情况下，当两个表查询时，规则为<br>– 1.从<strong>第一张表</strong>中，<strong>取出一行</strong>和<strong>第二张表的每一行</strong>进行<strong>组合</strong><br>– 2.返回结果，一共<strong>返回的记录数</strong>为<strong>第一张表的行数*第二张表的行数</strong><br>– 3.这样多表查询<strong>默认处理返回的结果</strong>，称为<strong>笛卡尔表</strong><br>– 4.<strong>解决</strong>这个多表的<strong>关键</strong>就是要写出<strong>正确的过滤条件where</strong>，需求<strong>程序员进行分析</strong><br>– 5.当我们需要指<strong>定显示某个表的列</strong>是，需要 <strong>表.列</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1,dname FROM emp,dept
+	WHERE emp.deptno&#x3D;dept.deptno;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1,emp.deptno FROM emp,dept
+	WHERE emp.deptno&#x3D;dept.deptno;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+<p>#注意事项：<strong>多表查询的条件不能少于表的个数-1，否则会出现笛卡儿集</strong><br>– 如何显示部门号为10的部门名，员工名和工资</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1,dname,emp.deptno
+	from emp,dept
+	where emp.deptno&#x3D;dept.deptno and emp.deptno&#x3D;10;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 显示各个员工的姓名，工资，及其工资的级别<br>– 思路：姓名，工资来自<strong>emp</strong><br>–	 工资级别来自<strong>salgrade</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select ename,sa1,grade
+	from emp,salgrade
+	where sa1 between losal and hisal ;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h3><p>#<strong>多表查询的自连接</strong><br>– 思考：显示公司员工名字和他的上级的名字<br>– 分析：员工名字在emp，上级的名字在emp<br>– 员工与上级是通过emp表的mgr列关联</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT worker.ename,boss.ename
+	FROM emp worker,emp boss
+	WHERE worker.mgr&#x3D;boss.empno;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>自连接的特点</strong><br>– 1.把<strong>同一张表当作两张表</strong>来使用<br>– 2.<strong>需要给表取别名</strong><br>–	格式：<strong>表名 表别名</strong><br>– 3.<strong>列名不明确，可以指定列的别名</strong></p>
+<h3 id="多行子查询"><a href="#多行子查询" class="headerlink" title="多行子查询"></a>多行子查询</h3><p>#<strong>子查询的演示</strong><br>– 请思考：如何显示与SMITH同一部门的所有员工？<br>&#x2F;*<br>    1.先查询到SMITH的部门号<br>    2.把上面的select语句当作一个子查询来使用<br>*&#x2F;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT deptno
+	FROM emp
+	WHERE ename&#x3D;&#39;SMITH&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>单行子查询</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT *
+	FROM emp
+	WHERE deptno&#x3D;(
+		SELECT deptno
+		FROM emp
+		WHERE ename&#x3D;&#39;SMITH&#39;
+		)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 如何查询和部门号为10的工作相同的雇员的名字，岗位，工资，部门号。<br>– 但是不包含部门号为10的雇员<br>&#x2F;*<br>    1.先查询到10号部门有哪些工作<br>    2.把上面查询的结果当作子查询使用<br>*&#x2F;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DISTINCT job
+	FROM emp
+	WHERE deptno&#x3D;10;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,job,sa1,deptno
+	FROM emp
+	WHERE job IN(
+		SELECT DISTINCT job
+		FROM emp
+		WHERE deptno&#x3D;10
+		) AND deptno!&#x3D;10;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="多列子查询"><a href="#多列子查询" class="headerlink" title="多列子查询"></a>多列子查询</h3><p>#<strong>多列子查询</strong><br>– 请思考如何查询与smith的部门和岗位完全相同的所有雇员(并且不包含smith本人)<br>– <strong>(字段1，字段2…..) &#x3D; (select 字段1，字段2 from……)</strong></p>
+<p>– 分析：<br>– 1.得到smith的部门号和岗位</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT deptno,job
+	FROM emp
+	WHERE ename&#x3D;&#39;SMITH&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 2.把上面查询结果当作子查询来使用，并且使用多列子查询的语法进行匹配</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT*
+	FROM emp
+	WHERE(deptno,job)&#x3D;(
+			SELECT deptno,job
+			FROM emp
+			WHERE ename&#x3D;&#39;allen&#39;
+		) AND ename&lt;&gt;&#39;allen&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>&lt;&gt;表示不等于</strong></p>
+<p>#子查询练习<br>– 查找每个部门工资高于本部门平均工资的人的资料</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT *
+	FROM emp,(
+		SELECT deptno,AVG(sa1) avg_sa1
+		FROM emp
+		GROUP BY deptno
+	)temp
+	WHERE emp.deptno&#x3D;temp.deptno AND emp.sa1&gt;temp.avg_sa1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 查找每个部门工资最高的人的详细资料</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT *
+	FROM emp,(
+		SELECT deptno,MAX(sa1) max_sa1
+		FROM emp
+		GROUP BY deptno
+	)temp
+	WHERE emp.deptno&#x3D;temp.deptno AND emp.sa1&#x3D;temp.max_sa1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 查询每个部门的信息(包括：部门号，编号，地址)和人员数量<br>– 分析：<br>– 1.部门名,编号,地址来自dept表<br>– 2.各个部门的人员数量-》构建一个临时表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT COUNT(*),deptno
+	FROM emp
+	GROUP BY deptno;	<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT dname,dept.deptno,1oc ,per_num
+	FROM dept,(
+		SELECT COUNT(*) per_num,deptno
+		FROM emp
+		GROUP BY deptno
+	)temp
+	WHERE temp.deptno&#x3D;dept.deptno<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 还有一种写法,表.*<strong>表示将该表所有列都显示出来</strong>，可以简化sql语句<br>– <strong>在多表查询中，当多个表的列不重复时，才可以直接写列名</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT temp.*,dname,1oc
+	FROM dept,(
+		SELECT COUNT(*) per_num,deptno
+		FROM emp
+		GROUP BY deptno
+	)temp
+	WHERE temp.deptno&#x3D;dept.deptno<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="表复制和去重"><a href="#表复制和去重" class="headerlink" title="表复制和去重"></a>表复制和去重</h3><p>#<strong>演示表的复制</strong><br>– 为了对某个sql语句进行效率测试，我们需要海量数据时，可以使用此法为表创建海量数据</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE my_tb01
+	(id INT,
+	&#96;name&#96; VARCHAR(32),
+	sal DOUBLE,
+	job VARCHAR(32),
+	deptno INT);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 演示<strong>如何自我复制</strong><br>– 1.<strong>先把emp表的记录复制到my_tb01</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO my_tb01
+	(id,&#96;name&#96;,sal,job,deptno)
+	SELECT empno,ename,sa1,job,deptno FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 2.<strong>自我复制</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO my_tb01
+	SELECT * FROM my_tb01;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 如何<strong>删除掉一张表重复记录</strong><br>– 1.先<strong>创建一张表my_tb02</strong><br>– 2.<strong>让my_tb02有重复的记录</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE my_tb02 LIKE emp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>把emp表的结构(列)，复制到my_tb02</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO my_tb02
+	SELECT * FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 3.考虑去重<br>– 分析<br>&#x2F;*<br>    1.先创建一张临时表my_tb，该表的结构与my_tb02一致<br>    2.把my_tb02的记录通过distinct关键字处理后，把记录复制到my_tb<br>    3.清除掉my_tb02记录<br>    4.把my_tb表的记录复制到my_tb02<br>    5.drop掉临时表my_tb<br>*&#x2F;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE my_tb LIKE my_tb02;
+
+INSERT INTO my_tb
+	SELECT DISTINCT * FROM my_tb02;
+
+DELETE FROM my_tb02;
+
+INSERT INTO my_tb02
+	SELECT * FROM my_tb;
+	
+DROP TABLE my_tb;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="合并查询"><a href="#合并查询" class="headerlink" title="合并查询"></a>合并查询</h3><p>#<strong>演示合并查询</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1,job FROM emp WHERE sa1&gt;2500;
+
+SELECT ename,sa1,job FROM emp WHERE job&#x3D;&#39;manager&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>union all 就是将两个查询结果合并，不会去重</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1,job FROM emp WHERE sa1&gt;2500
+UNION ALL
+SELECT ename,sa1,job FROM emp WHERE job&#x3D;&#39;manager&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>union 该操作赋与 union all相似，但是会自动去掉结果中重复的记录</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT ename,sa1,job FROM emp WHERE sa1&gt;2500
+UNION
+SELECT ename,sa1,job FROM emp WHERE job&#x3D;&#39;manager&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="左外连接与右外连接"><a href="#左外连接与右外连接" class="headerlink" title="左外连接与右外连接"></a>左外连接与右外连接</h3><p>#<strong>演示外连接</strong></p>
+<p>– 比如：列出部门名称和这些部门的员工名称和工作，同时要求显示出那些没有员工的部门</p>
+<p>– 使用我们学习过的多表查询的sql，看看效果如何</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT dname,ename,job
+	FROM emp,dept
+	WHERE emp.deptno&#x3D;dept.deptno
+	ORDER BY dname;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>#外连接<br>– 1，<strong>左外连接 (如果左侧的表完全显示我们就说是左外连接)</strong><br>– 1，<strong>右外连接 (如果右侧的表完全显示我们就说是右外连接)</strong></p>
+<p>– 创建stu</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE stu (
+	id INT,
+	&#96;name&#96; VARCHAR(32));
+INSERT INTO stu VALUES(1,&#39;jack&#39;),(2,&#39;tom&#39;),(3,&#39;kity&#39;),(4,&#39;noo&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 创建表exam</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE exam (
+	id INT,
+	grade INT);
+INSERT INTO exam VALUES(1,56),(2,76),(11,8);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 使用<strong>左连接</strong>(显示所有人的成绩，如果没有成绩，也要显示该人的姓名和id号，成绩显示为空)<br>&#x2F;*<br>    <strong>格式：select…from 表1 left join 表2 on 条件</strong><br>*&#x2F;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT &#96;name&#96;,stu.id,grade
+	FROM stu,exam
+	WHERE stu.id&#x3D;exam.id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 改成左连接</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT &#96;name&#96;,stu.id ,grade
+	FROM stu LEFT JOIN exam
+	ON stu.id&#x3D;exam.id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<p>– <strong>右外连接</strong>(显示所有成绩，如果没有名字匹配，显示空)</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT &#96;name&#96;,grade,exam.id
+	FROM stu RIGHT JOIN exam
+	ON stu.id&#x3D;exam.id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT dept.deptno,&#96;ename&#96;,job
+	FROM emp RIGHT JOIN dept
+	ON emp.deptno&#x3D;dept.deptno<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT dept.deptno,&#96;ename&#96;,job
+	FROM dept LEFT JOIN emp
+	ON emp.deptno&#x3D;dept.deptno<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="MySql约束"><a href="#MySql约束" class="headerlink" title="MySql约束"></a>MySql约束</h2><h3 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h3><p>#<strong>演示主键使用</strong><br>– id name email</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t17 (
+	id INT PRIMARY KEY, -- 表示id列是主键
+	&#96;name&#96; VARCHAR(32),
+	email VARCHAR(32));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>主键列的值是不可以重复的</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t17
+	VALUES(1,&#39;jack&#39;,&#39;jack@sohu.com&#39;),(2,&#39;tom&#39;,&#39;tom@sohu.com&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t17 VALUES(1,&#39;lvy&#39;,&#39;lvy@sohu.com&#39;); 添加失败，主键重复<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>主键使用细节</strong><br>– <strong>primary key不能重复而且不能为null</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t17 VALUES(NULL,&#39;gsp&#39;,&#39;gsp@sohu.com&#39;); -- Column &#39;id&#39; cannot be null<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>一张表最多只能有一个主键，但可以是复合主键</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t18 (
+	id INT PRIMARY KEY, 
+	&#96;name&#96; VARCHAR(32) PRIMARY KEY,
+	email VARCHAR(32)); -- Multiple primary key defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>演示复合主键使用(id和name做成复合主键，即id和name做为一个复合主键，而不是id是主键1，name是主键2)</strong>	</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t18 (
+	id INT , 
+	&#96;name&#96; VARCHAR(32),
+	email VARCHAR(32),
+	PRIMARY KEY(id,&#96;name&#96;));
+
+INSERT INTO t18 VALUES(1,&#39;gsp&#39;,&#39;gsp@sohu.com&#39;);
+INSERT INTO t18 VALUES(1,&#39;dsa&#39;,&#39;dsa@sohu.com&#39;);
+INSERT INTO t18 VALUES(2,&#39;dsa&#39;,&#39;dsa@sohu.com&#39;);
+INSERT INTO t18 VALUES(1,&#39;gsp&#39;,&#39;gsp@sohu.com&#39;); -- Duplicate entry &#39;1-gsp&#39; for key &#39;PRIMARY&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 主键的<strong>指定方式有两种</strong><br>– 1.<strong>直接在字段名后指定：字段名 primary key</strong><br>– 2.<strong>在表定义最后写 primary key(列名);</strong><br>– 参考上面创建表的方式<br>– 使用<strong>desc表名，可以看到primary key的情况</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DESC t18;
+DESC t17;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– <strong>实际开发中，每个表往往都会设计一个主键</strong></p>
+<h3 id="unique"><a href="#unique" class="headerlink" title="unique"></a>unique</h3><p>#<strong>演示unique使用</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t19 (
+	id INT UNIQUE,-- 表示id列是不可重复的，但可为null
+	&#96;name&#96; VARCHAR(32),
+	email VARCHAR(32));
+	
+INSERT INTO t19 VALUES(1,&#39;jack&#39;,&#39;jack@sohu.com&#39;);-- Duplicate entry &#39;1&#39; for key &#39;id&#39;
+INSERT INTO t19 VALUES(1,&#39;tom&#39;,&#39;tom@sohu.com&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>unique使用细节</strong><br>– <strong>如果没有指定not null，则unique字段可以有多个null</strong><br>– <strong>如果一个列(字段)是unique not null，那么使用效果类似primary key</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t19 VALUES(NULL,&#39;jack&#39;,&#39;jack@sohu.com&#39;);
+SELECT * FROM t19;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– <strong>一张表可以有多个unique字段</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t20 (
+	id INT UNIQUE,
+	&#96;name&#96; VARCHAR(32) UNIQUE,
+	email VARCHAR(32));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h3><p>#<strong>外键演示</strong><br>– 创建主表 my_class</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE my_class (
+	id INT PRIMARY KEY, -- 班级编号
+	&#96;name&#96; VARCHAR(32) NOT NULL DEFAULT &#39;&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 创建从表 my_stu</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE my_stu (
+	id INT PRIMARY KEY, -- 学生编号
+	&#96;name&#96; VARCHAR(32) NOT NULL DEFAULT &#39;&#39;,
+	class_id INT, -- 学生所在班级的编号<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 下面<strong>指定外键关系</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">FOREIGN KEY(class_id) REFERENCES my_class(id));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 测试数据</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO my_class VALUES(100,&#39;java&#39;),(200,&#39;web&#39;);
+SELECT * FROM my_class;
+INSERT INTO my_stu VALUES(1,&#39;tom&#39;,100);
+INSERT INTO my_stu VALUES(2,&#39;jack&#39;,200);
+INSERT INTO my_stu VALUES(3,&#39;mary&#39;,300); -- 失败，因为300号班级不存在
+INSERT INTO my_stu VALUES(4,&#39;king&#39;,NULL); -- 可以，外键没有写not null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>外键细节</strong><br>– 1.<strong>外键指向的表的字段，要求是primary key或者是unique</strong><br>– 2.<strong>表的存储引擎是innodb，这样的表才支持外键</strong><br>– 3.<strong>外键字段的类型要和主键字段的类型一致(长度可以不同)</strong><br>– 4.<strong>外键字段的值，必须在主键字段中出现过，或者为null(前提是外键字段允许为null)</strong><br>– 5.<strong>一旦建立主外键的关系，数据不能随意删除了(需要先删除外键对应数据，才能删除主键对应数据)</strong></p>
+<h3 id="check"><a href="#check" class="headerlink" title="check"></a>check</h3><p>#演示check使用<br>– <strong>mysql5.7目前还不支持check，只做语法校验，但是不会生效</strong><br>– <strong>但在oracle,sql server这两个数据库中是真的生效</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t21 (
+	id INT PRIMARY KEY,
+	&#96;name&#96; VARCHAR(32),
+	sex VARCHAR(6) CHECK (sex IN(&#39;man&#39;,&#39;woman&#39;)),-- 即检查插入的记录是不是这两个字符串，如果是就成功，如果不是就插入失败
+	sal DOUBLE CHECK (sal&gt;1000 AND sal&lt;2000));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>添加数据</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t21 VALUES(1,&#39;jack&#39;,&#39;mid&#39;,1)-- 添加失败(mid不在检查范围内并且sal小于1000)
+SELECT * FROM t21;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="自增长"><a href="#自增长" class="headerlink" title="自增长"></a>自增长</h3><p>#<strong>演示自增长的使用</strong><br>– 创建表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t22 (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(32) NOT NULL DEFAULT &#39;&#39;,
+	&#96;name&#96; VARCHAR(32) NOT NULL DEFAULT &#39;&#39;);
+DESC t22;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 测试<strong>自增长的使用</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t22 VALUES(NULL,&#39;tom@sohu.com&#39;,&#39;tom&#39;);
+INSERT INTO t22 (email,&#96;name&#96;) VALUES(&#39;lvy@sohu.com&#39;,&#39;lvy&#39;);
+SELECT * FROM t22;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>自增长使用细节</strong><br>– 1.<strong>一般来说自增长是和primary key配合使用的</strong><br>– 2.<strong>自增长也可以单独使用(但是需要配合一个unique)</strong><br>– 3.<strong>自增长修饰的字段为整数型的(虽然小数也可以但是非常非常少这样使用)</strong><br>– 4.<strong>自增长默认从1开始，你也可以通过如下命令修改</strong><br>– 	<strong>alter table 表名 auto_increment&#x3D;xxx;</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE t22 AUTO_INCREMENT&#x3D;10;
+INSERT INTO t22 VALUES(NULL,&#39;jack@sohu.com&#39;,&#39;jack&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 5.<strong>如果你添加数据时，给自增长字段(列)指定的有值，则以指定的值为准</strong><br>– 6.<strong>一般来说，如果指定了自增长，就按照自增长的规则来添加数据，不要自己指定数值</strong><br>&#x2F;*	<strong>同时自增长会从指定的值开始,</strong><br>    <strong>比如之前自增长到10，而你添加数据时，</strong><br>    <strong>指定了100给自增长字段，</strong><br>    <strong>那么自增长会从10直接跳到100重新开始自增长</strong><br>*&#x2F;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t22 VALUES(100,&#39;brck@sohu.com&#39;,&#39;brck&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="MySql索引"><a href="#MySql索引" class="headerlink" title="MySql索引"></a>MySql索引</h2><h3 id="索引优化速度及索引原理"><a href="#索引优化速度及索引原理" class="headerlink" title="索引优化速度及索引原理"></a>索引优化速度及索引原理</h3><p>– <strong>索引的原理</strong><br>– <strong>没用索引</strong>为什么查询海量数据会<strong>慢</strong>？因为是<strong>全表扫描</strong><br>– <strong>使用索引</strong>为什么查询海量数据会<strong>快</strong>？因为<strong>形成一个索引的数据结构，比如二叉树</strong><br>– <strong>使用索引的代价</strong><br>– 1.<strong>磁盘占用空间变大</strong><br>– 2.<strong>对dml(update,delete,insert)语句的执行效率产生影响，变慢</strong></p>
+<h3 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h3><p>– 1.<strong>主键索引，主键自动的为主索引(类型Primary Key)</strong><br>– 2.<strong>唯一索引(UNIQUE)</strong><br>– 3.<strong>普通索引(INDEX)</strong><br>– 4.<strong>全文索引(FULLTEXT)[适用于MylSAM]</strong></p>
+<h3 id="mysql的索引的使用"><a href="#mysql的索引的使用" class="headerlink" title="mysql的索引的使用"></a>mysql的索引的使用</h3><p>– <strong>创建索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t23 (
+	id INT,
+	&#96;name&#96; VARCHAR(32));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>查询表是否有索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW INDEXES FROM t23;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>添加索引</strong><br>– 添加<strong>唯一索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE UNIQUE INDEX id_index ON t23 (id);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 添加<strong>普通索引方法1</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE INDEX id_index ON t23 (id);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 添加<strong>普通索引方法2</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE t23 ADD INDEX id_index (id);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>如何选择索引类型</strong><br>– <strong>如果某列的值，是不会重复的，则优先考虑使用unique索引，否则使用普通索引</strong></p>
+<p>– <strong>添加主键索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t24 (
+	id INT,
+	&#96;name&#96; VARCHAR(32));
+ALTER TABLE t24 ADD PRIMARY KEY (id);
+SHOW INDEX FROM t24;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>删除索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP INDEX id_index ON t23;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>删除主键索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE t24 DROP PRIMARY KEY;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>修改索引</strong><br>– <strong>先删除，在添加新的索引</strong></p>
+<p>– <strong>查询索引</strong><br>– 方式1<br><strong>SHOW INDEX FROM t23;</strong><br>– 方式2<br><strong>SHOW INDEXES FROM t23;</strong><br>– 方式3<br><strong>SHOW KEYS FROM t23;</strong><br>– 方式4<br><strong>DESC t23</strong></p>
+<h3 id="创建索引规则"><a href="#创建索引规则" class="headerlink" title="创建索引规则"></a>创建索引规则</h3><p>– <strong>哪些列适合使用索引</strong><br>– 1.<strong>较频繁的作为查询条件字段应该创建索引</strong><br>– 2.<strong>唯一性太差的字段不适合单独创建索引，即使频繁作为查询条件</strong><br>– 3.<strong>更新非常频繁的字段不适合创建索引</strong><br>– 4.<strong>不会出现在where子句中字段不该创建索引</strong></p>
+<h2 id="MySql事务"><a href="#MySql事务" class="headerlink" title="MySql事务"></a>MySql事务</h2><h3 id="什么是事务及事务操作？"><a href="#什么是事务及事务操作？" class="headerlink" title="什么是事务及事务操作？"></a>什么是事务及事务操作？</h3><p>– <strong>事务用于保证数据的一致性，它由一组相关的dml语句组成，该组的dml语句要么全部成功，要么全部失败</strong><br>– 演示mysql数据库控制台事务的几个重要操作<br>– <strong>start transaction  开始一个事务</strong><br>– <strong>savepoint  设置保存点</strong><br>– <strong>rollback to  回退事务</strong><br>– <strong>rollback  回退全部事务</strong><br>– <strong>commit  提交事务，所有的操作生效，不能回退</strong></p>
+<p>– 1.创建一张表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t25 (
+	id INT,
+	&#96;name&#96; VARCHAR(32));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 2.<strong>开始事务</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">START TRANSACTION<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 3.<strong>设置保存点</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SAVEPOINT a<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>执行dml操作</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t25 VALUES(100,&#39;tom&#39;);
+SELECT * FROM t25;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 4.<strong>设置保存点</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SAVEPOINT b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>执行dml操作</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t25 VALUES(200,&#39;jack&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>回退到b</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ROLLBACK TO b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>回退到a</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ROLLBACK TO a<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 如果这样，表示<strong>直接回退到事务开始的状态</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ROLLBACK<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>提交事务</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">COMMIT<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="事务注意细节"><a href="#事务注意细节" class="headerlink" title="事务注意细节"></a>事务注意细节</h3><p>– 讨论 <strong>事务细节</strong><br>– 1.<strong>如果不开始事务，在默认情况下，dml操作是自动提交的，不能回滚</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO t25 VALUES(300,&#39;mary&#39;);
+SELECT * FROM t25;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 2.<strong>如果开始一个事务，你没有创建保存点，你可以执行rollback</strong><br>– <strong>默认就是回退到事务开始的状态</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">START TRANSACTION
+INSERT INTO t25 VALUES(400,&#39;king&#39;);
+INSERT INTO t25 VALUES(500,&#39;scott&#39;);
+ROLLBACK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 3.<strong>你也可以在这个事务中(还没有提交时)，创建多个保存点</strong><br>– 4.<strong>你可以在事务没有提交前，选择回退到哪个保存点</strong><br>– 5.<strong>InnoDB存储引擎支持事务，MyISAM不支持</strong><br>– 6.<strong>开始一个事务 start transaction 或者 set autocommit&#x3D;off;</strong></p>
+<h2 id="MySql事务隔离级别"><a href="#MySql事务隔离级别" class="headerlink" title="MySql事务隔离级别"></a>MySql事务隔离级别</h2><h3 id="4种隔离级别"><a href="#4种隔离级别" class="headerlink" title="4种隔离级别"></a>4种隔离级别</h3><p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161537760.png" alt="image-20221216153701612" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161540559.png" alt="image-20221216154020365" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161542996.png" alt="image-20221216154213855" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="设置隔离"><a href="#设置隔离" class="headerlink" title="设置隔离"></a>设置隔离</h3><p>#<strong>事务隔离级别介绍</strong><br><strong>– 1.多个连接开启各自事务操作数据库中数据时，数据库系统要负责隔离操作</strong><br><strong>– 以保证各个连接在获取数据时的准确性</strong><br><strong>– 2.如果不考虑隔离性，可能会引发如下问题：</strong><br><strong>– 脏读：当一个事务读取另一个事务尚未提交的修改时，产生脏读</strong><br><strong>– 不可重复读：同一查询在同一事务中多次进行，由于其他提交事务所做的</strong><br><strong>– 修改或删除，每次返回不同的结果集，此时发生不可重复读</strong><br><strong>– 幻读：同一查询在同一事务中多次进行，由于其他提交事务所做的插入操作</strong><br><strong>– 每次返回不同的结果集，此时发生幻读</strong></p>
+<p>#<strong>演示mysql的事务隔离级别</strong><br>– 1.<strong>开了两个mysql的控制台</strong><br>– 2.<strong>查看当前mysql的隔离级别</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT @@tx_isolation;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; SELECT @@tx_isolation;
++-----------------+
+| @@tx_isolation  |
++-----------------+
+| REPEATABLE-READ |
++-----------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– 3.<strong>把其中一个控制台的隔离级别设置 Read uncommitted</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 4.创建表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE &#96;account&#96; (
+	id INT,
+	&#96;name&#96; VARCHAR(32),
+	money INT);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>查看当前会话隔离级别</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT @@tx_isolation;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>查看系统当前隔离级别</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT @@global.tx_isolation;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>设置当前会话隔离级别</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>设置系统当前隔离级别</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SET GLOBAL TRANSACTION ISOLATION LEVE<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="MySql表类型与存储引擎"><a href="#MySql表类型与存储引擎" class="headerlink" title="MySql表类型与存储引擎"></a>MySql表类型与存储引擎</h2><h3 id="表类型和存储引擎"><a href="#表类型和存储引擎" class="headerlink" title="表类型和存储引擎"></a>表类型和存储引擎</h3><p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161613245.png" alt="image-20221216161340056" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161615107.png" alt="image-20221216161502993" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161615812.png" alt="image-20221216161558629" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>– <strong>查看所有存储引擎</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW ENGINES<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>innodb 存储引擎</strong><br>– <strong>1.支持事务 2.支持外键 3.支持行级锁</strong></p>
+<p>– <strong>myisam 存储引擎</strong><br>– <strong>1.添加数据快 2.不支持外键和事务 3.支持表级锁</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t26 (
+	id INT,
+	&#96;name&#96; VARCHAR(32)) ENGINE MYISAM
+START TRANSACTION
+SAVEPOINT a
+INSERT INTO t26 VALUES(1,&#39;jack&#39;);
+SELECT * FROM t26;
+ROLLBACK TO a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>memory 存储引擎</strong><br>– <strong>1.数据存储在内存中(关闭了MySql服务，数据丢失，但是表结构还在) 2.执行速度很快(没有IO读写) 3.默认支持索引(hash表)</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE t27 (
+	id INT,
+	&#96;name&#96; VARCHAR(32)) ENGINE MEMORY
+INSERT INTO t27 VALUES(1,&#39;jack&#39;),(2,&#39;tom&#39;),(3,&#39;mery&#39;);
+SELECT * FROM t27;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>指令修改存储引擎</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE &#96;t27&#96; ENGINE &#x3D; INNODB;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="如何选择表的存储引擎"><a href="#如何选择表的存储引擎" class="headerlink" title="如何选择表的存储引擎"></a>如何选择表的存储引擎</h3><p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161617152.png" alt="image-20221216161721012" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h3 id="视图原理"><a href="#视图原理" class="headerlink" title="视图原理"></a>视图原理</h3><p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161626528.png" alt="image-20221216162656363" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161626723.png" alt="image-20221216162602521" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>– 1.视图是<strong>根据基表(可以是多个基表)来创建</strong>的，视图是<strong>虚拟的表</strong><br>– 2.<strong>视图也有列，数据来自基表</strong><br>– 3.<strong>通过视图可以修改基表的数据</strong><br>– 4.<strong>基表的改变，也会影响到视图的数据</strong></p>
+<h3 id="视图的使用"><a href="#视图的使用" class="headerlink" title="视图的使用"></a>视图的使用</h3><p>– 创建一个视图emp_view01，只能查询emp表的(empno,ename,job和deptno)信息<br>– <strong>创建视图</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE VIEW emp_view01
+	AS
+	SELECT empno,ename,job,deptno FROM emp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>查看视图</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DESC emp_view01;
+SELECT * FROM emp_view01;
+SELECT empno,job FROM emp_view01;
+SELECT sa1 FROM emp_view01; -- Unknown column &#39;sa1&#39; in &#39;field list&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>查看创建视图的指令</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW CREATE VIEW emp_view01;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>删除视图</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP VIEW emp_view01;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>视图细节讨论</strong><br>– 1.<strong>创建视图后，到数据库去看，对应视图只有一个视图结构文件(形式：视图名.frm)，不会有数据文件(视图名.ibd)</strong><br>– 2.<strong>视图的数据变化会影响到基表，基表的数据变化也会影响到视图(insert,update,delete)</strong><br>– <strong>修改视图</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE emp_view01
+	SET job&#x3D;&#39;MANAGER&#39;
+	WHERE empno&#x3D;7369;
+SELECT * FROM emp_view01; -- 查询视图
+SELECT * FROM emp; -- 查询基表<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>修改基表，也会影响到视图</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE emp
+	SET job&#x3D;&#39;SALESMAN&#39;
+	WHERE empno&#x3D;7369;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– 3.<strong>视图中可以再使用视图，数据依然来自基表，比如从emp_view01这个视图中选出empno和ename做新视图</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DESC emp_view01;
+
+CREATE VIEW emp_view02
+	AS
+	SELECT empno,ename FROM emp_view01;
+SELECT * FROM emp_view02;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>视图练习</strong><br>– 针对emp，dept和salgrade三张表，创建一个视图emp_view03<br>– 可以显示雇员编号，雇员名，雇员部门名称和薪水级别[即使用三张表，创建一个视图]<br>&#x2F;*<br>    分析：使用三表联合查询，得到结果<br>    将得到的结果，构建成视图<br>*&#x2F;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE VIEW emp_view03
+	AS
+SELECT empno,ename,dname,grade
+	FROM emp,dept,salgrade
+	WHERE emp.deptno&#x3D;dept.deptno AND 
+	(sa1 BETWEEN losal AND hisal)
+SELECT * FROM emp_view03<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="MySql管理"><a href="#MySql管理" class="headerlink" title="MySql管理"></a>MySql管理</h2><h3 id="MySql用户管理"><a href="#MySql用户管理" class="headerlink" title="MySql用户管理"></a>MySql用户管理</h3><p>– MySql用户的管理<br>– 原因：当我们做项目开发时，可以根据不同的开发人员，赋给他相应的MySql操作权限<br>– 所以，MySql数据库管理人员(root)，根据需要创建不同的用户，赋给相应的权限，供人员使用</p>
+<p>– 1.<strong>创建新的用户</strong><br>– 解读(1) <strong>‘lby‘@’localhost’表示用户的完整信息，’lby’用户名，’localhost’登录的IP</strong><br>– (2) <strong>123456表示密码，但是注意，存放到mysql.user表时，是password(‘123456’)加密后的密码</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE USER &#39;lby&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 2.<strong>删除用户</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP USER &#39;lby&#39;@&#39;localhost&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 3.<strong>修改自己的密码</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SET PASSWORD&#x3D;PASSWORD(&#39;abcdef&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– 4.<strong>修改其他人的密码，需要权限(root用户权限高，可以修改其他用户密码)</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SET PASSWORD FOR &#39;lby&#39;@&#39;localhost&#39;&#x3D;PASSWORD(&#39;123456&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161638540.png" alt="image-20221216163836385" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="MySql权限管理"><a href="#MySql权限管理" class="headerlink" title="MySql权限管理"></a>MySql权限管理</h3><p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161637625.png" alt="image-20221216163721504" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ModestPanda/picture@main/imp202212161639195.png" alt="image-20221216163951055" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>– <strong>演示用户权限的管理</strong><br>– 1.<strong>创建用户 libai 密码 123，从本地登录</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE USER &#39;libai&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>使用root用户创建testdb，表news</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE DATABASE testdb
+CREATE TABLE news (
+	id INT,
+	content VARCHAR(32));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>添加一条测试数据</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO news VALUES(100,&#39;广州新闻&#39;)
+SELECT * FROM news<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– <strong>给libai分配查看news表和添加news的权限</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">GRANT SELECT,INSERT
+	ON testdb.news
+	TO &#39;libai&#39;@&#39;localhost&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>给libai增加权限</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">GRANT UPDATE
+	ON testdb.news
+	TO &#39;libai&#39;@&#39;localhost&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>– <strong>修改libai的密码为abc</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SET PASSWORD FOR &#39;libai&#39;@&#39;localhost&#39;&#x3D;PASSWORD(&#39;abc&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>回收libai用户在testdb.news表的所有权限</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">REVOKE SELECT,UPDATE,INSERT ON testdb.news FROM &#39;libai&#39;@&#39;localhost&#39;
+REVOKE ALL ON testdb.news FROM &#39;libai&#39;@&#39;localhost&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– <strong>如果权限没有生效，可以执行下面的指令</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">FLUSH PRIVILEGES<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="MySql用户管理细节"><a href="#MySql用户管理细节" class="headerlink" title="MySql用户管理细节"></a>MySql用户管理细节</h3><p>#<strong>说明用户管理的细节</strong><br>– 在<strong>创建用户的时候，如果不指定Host，则为%，%表示所有IP都有连接权限</strong><br>– <strong>create user xxx;</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE USER jack
+SELECT &#96;host&#96;,&#96;user&#96; FROM mysql.user<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>– 你也可以这样子指定<br>– *<em>create user ‘xxx‘@’192.168.1.%’表示xxx用户在192.168.1.<em>的ip可以登录mysql</em></em></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE USER &#39;smith&#39;@&#39;192.168.1.%&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>– <strong>在删除用户时，如果host不是%，需要明确指定’用户‘@’host值’</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP USER jack -- 默认就是drop user &#39;jack&#39;@&#39;%&#39;
+DROP USER &#39;smith&#39;@&#39;192.168.1.%&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+</article>
+    
+    
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/post/java-4.html" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%88%86%E4%BA%AB/">
+                    分享
+                </a>
+            </div>
+            <h5>
+                <a href="/post/java-4.html" class="trm-anima-link">
+                    Java-3
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>22/11/26</li>
+                <li>13:00</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                Theme - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.0-beta.4
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top" data-title="Back To Top">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.0-beta.4"></script>
+
+</body>
+
+</html>
