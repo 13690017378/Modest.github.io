@@ -85,7 +85,7 @@
 
 
 <!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"tridiamond.tech","author":"Humble","root":"/","typed_text":["Humble...O.o?","Panda","a Web Developer"],"theme_version":"2.0.0-beta.4","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon-32x32.png","icon16":"/img/favicon-16x16.png","icon32":"/img/favicon-32x32.png","appleTouchIcon":"apple-touch-icon.png","webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"/img/favicon.ico","showText":"(๑╹◡╹๑)咦！又好了！","hideText":"(∩´﹏`∩)不小心崩溃拉！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"prismjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script>window.ASYNC_CONFIG = {"hostname":"tridiamond.tech","author":"Humble","root":"/","typed_text":["Humble...O.o?","Panda","a Web Developer"],"theme_version":"2.0.0-beta.4","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon-32x32.png","icon16":"/img/favicon-16x16.png","icon32":"/img/favicon-32x32.png","appleTouchIcon":"apple-touch-icon.png","webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"/img/favicon.ico","showText":"(๑╹◡╹๑)咦！又好了！","hideText":"(∩´﹏`∩)不小心崩溃拉！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"prismjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
 <script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-07-07 10:47:51"};</script>
 
 <!-- Theme mode css -->
@@ -175,14 +175,14 @@
             
             <li class="menu-item-has-children ">
                 <a  href="/" target="">
-                    首页
+                    Home
                 </a>
                 
             </li>
             
             <li class="menu-item-has-children ">
                 <a  href="/archives/" target="">
-                    归档
+                    Archives
                 </a>
                 
             </li>
@@ -280,7 +280,17 @@
 <div class="trm-main-card-frame trm-sidebar">
     <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
     
-        <!-- card header -->
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
 <div class="trm-mc-header">
     <div class="trm-avatar-frame trm-mb-20">
         <img alt="Avatar" class="trm-avatar" src="/img/modest.jpg">
@@ -298,7 +308,7 @@
     
 </div>
 <!-- card header end -->
-        <!-- sidebar social -->
+                <!-- sidebar social -->
 
 <div class="trm-divider trm-mb-40 trm-mt-40"></div>
 <div class="trm-social">
@@ -310,7 +320,7 @@
 </div>
 
 <!-- sidebar social end -->
-        <!-- info -->
+                <!-- info -->
 <div class="trm-divider trm-mb-40 trm-mt-40"></div>
 <ul class="trm-table trm-mb-20">
     
@@ -335,17 +345,24 @@
 </ul>
 <!-- info end -->
 
-        
+                
     <div class="trm-divider trm-mb-40 trm-mt-40"></div>
     <!-- action button -->
     <div class="text-center">
         <a href="mailto:1487351561@qq.com" class="trm-btn">
-            联系我
+            Contact Me
             <i class="iconfont far fa-envelope"></i>
         </a>
     </div>
     <!-- action button end -->
 
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#1-数组"  data-scroll-to="#1-数组"><span class="toc-number">1.</span> <span class="toc-text">1.数组</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#1-介绍"  data-scroll-to="#1-介绍"><span class="toc-number">2.</span> <span class="toc-text">1.介绍</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#2-使用方式"  data-scroll-to="#2-使用方式"><span class="toc-number">3.</span> <span class="toc-text">2.使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#1-使用方式1-动态初始化"  data-scroll-to="#1-使用方式1-动态初始化"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.使用方式1-动态初始化</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#2-使用方式2-动态初始化"  data-scroll-to="#2-使用方式2-动态初始化"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.使用方式2-动态初始化</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#3-使用方式3-静态初始化"  data-scroll-to="#3-使用方式3-静态初始化"><span class="toc-number">3.0.3.</span> <span class="toc-text">3.使用方式3-静态初始化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#3-注意事项"  data-scroll-to="#3-注意事项"><span class="toc-number">4.</span> <span class="toc-text">3.注意事项</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#4-数组赋值机制"  data-scroll-to="#4-数组赋值机制"><span class="toc-number">5.</span> <span class="toc-text">4.数组赋值机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#5-数组拷贝"  data-scroll-to="#5-数组拷贝"><span class="toc-number">7.</span> <span class="toc-text">5.数组拷贝</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#6-数组翻转"  data-scroll-to="#6-数组翻转"><span class="toc-number">8.</span> <span class="toc-text">6.数组翻转</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#思路-1"  data-scroll-to="#思路-1"><span class="toc-number">8.1.</span> <span class="toc-text">思路-1</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#思路-2"  data-scroll-to="#思路-2"><span class="toc-number">8.2.</span> <span class="toc-text">思路-2</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#7-数组扩容"  data-scroll-to="#7-数组扩容"><span class="toc-number">9.</span> <span class="toc-text">7.数组扩容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#案例-1"  data-scroll-to="#案例-1"><span class="toc-number">9.1.</span> <span class="toc-text">案例-1</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#案例-2"  data-scroll-to="#案例-2"><span class="toc-number">9.2.</span> <span class="toc-text">案例-2</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#8-数组缩减"  data-scroll-to="#8-数组缩减"><span class="toc-number">10.</span> <span class="toc-text">8.数组缩减</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#9-冒泡排序"  data-scroll-to="#9-冒泡排序"><span class="toc-number">11.</span> <span class="toc-text">9.冒泡排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#介绍"  data-scroll-to="#介绍"><span class="toc-number">11.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#分析"  data-scroll-to="#分析"><span class="toc-number">11.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#案例"  data-scroll-to="#案例"><span class="toc-number">11.3.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#10-查找"  data-scroll-to="#10-查找"><span class="toc-number">12.</span> <span class="toc-text">10.查找</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#2-方法"  data-scroll-to="#2-方法"><span class="toc-number">13.</span> <span class="toc-text">2.方法</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#1-概述"  data-scroll-to="#1-概述"><span class="toc-number">14.</span> <span class="toc-text">1.概述</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#2-方法定义和调用"  data-scroll-to="#2-方法定义和调用"><span class="toc-number">15.</span> <span class="toc-text">2.方法定义和调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#2-1方法定义"  data-scroll-to="#2-1方法定义"><span class="toc-number">15.1.</span> <span class="toc-text">2.1方法定义</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#-1"  data-scroll-to="#-1"><span class="toc-number">15.2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#2-2方法调用"  data-scroll-to="#2-2方法调用"><span class="toc-number">15.3.</span> <span class="toc-text">2.2方法调用</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#-2"  data-scroll-to="#-2"><span class="toc-number">15.4.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#2-3案例"  data-scroll-to="#2-3案例"><span class="toc-number">15.5.</span> <span class="toc-text">2.3案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#3-方法调用过程分析"  data-scroll-to="#3-方法调用过程分析"><span class="toc-number">16.</span> <span class="toc-text">3.方法调用过程分析</span></a></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#4-带参数方法的定义和调用"  data-scroll-to="#4-带参数方法的定义和调用"><span class="toc-number">17.</span> <span class="toc-text">4.带参数方法的定义和调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#4-1带参数方法的定义"  data-scroll-to="#4-1带参数方法的定义"><span class="toc-number">17.1.</span> <span class="toc-text">4.1带参数方法的定义</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#4-2带参数方法的调用"  data-scroll-to="#4-2带参数方法的调用"><span class="toc-number">17.2.</span> <span class="toc-text">4.2带参数方法的调用</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#4-3案例"  data-scroll-to="#4-3案例"><span class="toc-number">17.3.</span> <span class="toc-text">4.3案例</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#4-4形参和实参"  data-scroll-to="#4-4形参和实参"><span class="toc-number">17.4.</span> <span class="toc-text">4.4形参和实参</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#5-带返回值方法的定义和调用"  data-scroll-to="#5-带返回值方法的定义和调用"><span class="toc-number">18.</span> <span class="toc-text">5.带返回值方法的定义和调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#5-1带返回值方法的定义"  data-scroll-to="#5-1带返回值方法的定义"><span class="toc-number">18.1.</span> <span class="toc-text">5.1带返回值方法的定义</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#5-2带返回值方法的调用"  data-scroll-to="#5-2带返回值方法的调用"><span class="toc-number">18.2.</span> <span class="toc-text">5.2带返回值方法的调用</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#5-3案例"  data-scroll-to="#5-3案例"><span class="toc-number">18.3.</span> <span class="toc-text">5.3案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#6-方法的注意事项"  data-scroll-to="#6-方法的注意事项"><span class="toc-number">19.</span> <span class="toc-text">6.方法的注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#6-1方法不能嵌套定义"  data-scroll-to="#6-1方法不能嵌套定义"><span class="toc-number">19.1.</span> <span class="toc-text">6.1方法不能嵌套定义</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#6-2void表示无返回值"  data-scroll-to="#6-2void表示无返回值"><span class="toc-number">19.2.</span> <span class="toc-text">6.2void表示无返回值</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#6-3方法的通用格式"  data-scroll-to="#6-3方法的通用格式"><span class="toc-number">19.3.</span> <span class="toc-text">6.3方法的通用格式</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#7-方法重载"  data-scroll-to="#7-方法重载"><span class="toc-number">20.</span> <span class="toc-text">7.方法重载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#7-1方法重载概述"  data-scroll-to="#7-1方法重载概述"><span class="toc-number">20.1.</span> <span class="toc-text">7.1方法重载概述</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#7-2方法重载特点"  data-scroll-to="#7-2方法重载特点"><span class="toc-number">20.2.</span> <span class="toc-text">7.2方法重载特点</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#8-方法的参数传递"  data-scroll-to="#8-方法的参数传递"><span class="toc-number">21.</span> <span class="toc-text">8.方法的参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#8-1基本类型"  data-scroll-to="#8-1基本类型"><span class="toc-number">21.1.</span> <span class="toc-text">8.1基本类型</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#8-2引用类型"  data-scroll-to="#8-2引用类型"><span class="toc-number">21.2.</span> <span class="toc-text">8.2引用类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#9-递归"  data-scroll-to="#9-递归"><span class="toc-number">22.</span> <span class="toc-text">9.递归</span></a></li></ol>
+</div>
+            </div>
+        </div>
     
     </div>
 </div>
@@ -757,7 +774,7 @@ true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
     <div class="col-lg-12">
         <!-- title -->
         <h5 class="trm-title-with-divider">
-            其他文章
+            Other Articles
             <span data-number="02"></span>
         </h5>
     </div>
@@ -843,11 +860,11 @@ true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
     
         <div class="trm-footer-item">
             <span>
-                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
             </span>
             <span class="footer-separator" data-separator=" | "></span>
             <span> 
-                主题 - 
+                Theme - 
                 <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
                 v2.0.0-beta.4
             </span>
@@ -870,7 +887,7 @@ true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
 
             <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
     
-        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
             <i class="iconfont fas fa-book-reader"></i>
         </div>
     
@@ -884,7 +901,7 @@ true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
   </div>
   <!-- app wrapper end -->
 
-  <div id="trm-back-top" class="trm-back-top" data-title="回到顶部">
+  <div id="trm-back-top" class="trm-back-top" data-title="Back To Top">
     <i class="iconfont fas fa-arrow-up"></i>
 </div>
   
